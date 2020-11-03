@@ -1,0 +1,33 @@
+SCAN
+https://kb.objectrocket.com/redis/scan-redis-command-examples-509
+
+SCAN iterates through all of the keys you have set in your database.
+
+Ex. criamos 20 chaves
+
+SCAN
+> scan 0
+aparece nos um tuplo, 
+	o 1o resultado é o numero do cursor X, 
+	o 2o são 10 chaves (10 pq o default é retornar 10 valores), ou menos se não houverem tantas
+entao, para ver mais chaves fazemos:
+> scan X
+e é devolvido o mesmo formato, numero do cursor e 10 chaves, ou menos
+se o numero do cursor for 0 significa q a iteraçao ja acabou, já vimos todas as chaves
+
+COUNT
+Podemos fazer o scan devolver um certo numero de chaves fazendo:
+> scan 0 count 5
+--> devolve 5 chaves
+
+MATCH
+Se quisermos encontrar chaves especificas
+> scan 0 match key1*
+devolve todas as chaves q comecem com "key1"
+> scan 0 match *5
+devolve todas as chaves q acabem com "5"
+> scan 0 match k*5
+devolve todas as chaves q comecem com "k" e acabem com "5"
+> scan 0 match k*y*5
+devolve todas as chaves q comecem com "k", tenham um"y" no meio e acabem com "5"
+  	

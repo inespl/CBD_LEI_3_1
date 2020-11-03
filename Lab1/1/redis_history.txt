@@ -1,0 +1,390 @@
+ines@ines-HP-Pavilion-Laptop-14-ce0xxx:~/Downloads/redis-6.0.8$ src/redis-cli
+127.0.0.1:6379> set testkey hello
+OK
+127.0.0.1:6379> exists testkey
+(integer) 1
+127.0.0.1:6379> type testkey
+string
+127.0.0.1:6379> keys *
+1) "foo"
+2) "testkey"
+127.0.0.1:6379> 
+127.0.0.1:6379> del testkey
+(integer) 1
+127.0.0.1:6379> exists testkey
+(integer) 0
+127.0.0.1:6379> type testkey
+none
+127.0.0.1:6379> scan 0
+1) "0"
+2) 1) "foo"
+127.0.0.1:6379> scan 0 match "hell*
+Invalid argument(s)
+127.0.0.1:6379> scan 0 match "hell*"
+1) "0"
+2) (empty array)
+127.0.0.1:6379> set b:1 "aa"
+OK
+127.0.0.1:6379> get b:1
+"aa"
+127.0.0.1:6379> set b:1:ReadAction 1
+OK
+127.0.0.1:6379> get b:1:ReadAction
+"1"
+127.0.0.1:6379> incr b:1:ReadAction
+(integer) 2
+127.0.0.1:6379> get b:1:ReadAction
+"2"
+127.0.0.1:6379> incrby b:1:ReadAction 20
+(integer) 22
+127.0.0.1:6379> get b:1:ReadAction
+"22"
+127.0.0.1:6379> decr b:1:ReadAction
+(integer) 21
+127.0.0.1:6379> get b:1:ReadAction
+"21"
+127.0.0.1:6379> decrby b:1:ReadAction 5
+(integer) 16
+127.0.0.1:6379> get b:1:ReadAction
+"16"
+127.0.0.1:6379> incr b:1 "IJ"
+(error) ERR wrong number of arguments for 'incr' command
+127.0.0.1:6379> mset p:2 "KV" p:3 "JA" p4:"MT"
+(error) ERR wrong number of arguments for MSET
+127.0.0.1:6379> mset p:2 "KV" p:3 "JA"
+OK
+127.0.0.1:6379> MSET p:2 "KV" p:3 "JA" p4:"MT"
+(error) ERR wrong number of arguments for MSET
+127.0.0.1:6379> mGET p:2 p:3
+1) "KV"
+2) "JA"
+127.0.0.1:6379> MSET p:2 "KV" p:3 "JA" p:4 "MT"
+OK
+127.0.0.1:6379> mGET p:2 p:3 p:4
+1) "KV"
+2) "JA"
+3) "MT"
+127.0.0.1:6379> lpush b:1:comment "HH"
+(integer) 1
+127.0.0.1:6379> lrange b:1:comment 0 -1
+1) "HH"
+127.0.0.1:6379> lpush b:1:comment "XXX"
+(integer) 2
+127.0.0.1:6379> lrange b:1:comment 0 -1
+1) "XXX"
+2) "HH"
+127.0.0.1:6379> lpush b:1:comment "GGGG"
+(integer) 3
+127.0.0.1:6379> lrange b:1:comment 0 -1
+1) "GGGG"
+2) "XXX"
+3) "HH"
+127.0.0.1:6379> rpush b:1:comment "ZZZZZ"
+(integer) 4
+127.0.0.1:6379> lrange b:1:comment 0 -1
+1) "GGGG"
+2) "XXX"
+3) "HH"
+4) "ZZZZZ"
+127.0.0.1:6379> lpop b:1:comment
+"GGGG"
+127.0.0.1:6379> lrange b:1:comment 0 -1
+1) "XXX"
+2) "HH"
+3) "ZZZZZ"
+127.0.0.1:6379> rpop b:1:comment
+"ZZZZZ"
+127.0.0.1:6379> lrange b:1:comment 0 -1
+1) "XXX"
+2) "HH"
+127.0.0.1:6379> brpop O:1:members 5
+(nil)
+(5.08s)
+127.0.0.1:6379> brpop b:1:members 5
+(nil)
+(5.05s)
+127.0.0.1:6379> get p:*
+(nil)
+127.0.0.1:6379> mget p:*
+1) (nil)
+127.0.0.1:6379> rpush Org:1:members Person:1 Person:2 Person:3 Person:4
+(integer) 4
+127.0.0.1:6379> lrange Org:1:memebers 0 -1
+(empty array)
+127.0.0.1:6379> lrange Org:1:members 0 -1
+1) "Person:1"
+2) "Person:2"
+3) "Person:3"
+4) "Person:4"
+127.0.0.1:6379> ltrim Org:1:members 0 2
+OK
+127.0.0.1:6379> lrange Org:1:members 0 -1
+1) "Person:1"
+2) "Person:2"
+3) "Person:3"
+127.0.0.1:6379> brpop Org:1:members 5
+1) "Org:1:members"
+2) "Person:3"
+127.0.0.1:6379> lrange Org:1:members 5
+(error) ERR wrong number of arguments for 'lrange' command
+127.0.0.1:6379> lrange Org:1:members 0 -1
+1) "Person:1"
+2) "Person:2"
+127.0.0.1:6379> brpop Org:1:members 5
+1) "Org:1:members"
+2) "Person:2"
+127.0.0.1:6379> brpop Org:1:members 5
+1) "Org:1:members"
+2) "Person:1"
+127.0.0.1:6379> brpop Org:1:members 5
+(nil)
+(5.04s)
+127.0.0.1:6379> lrange Org:1:members 0 -1
+(empty array)
+127.0.0.1:6379> rpush Org:1:members Person:1 Person:2 Person:3 Person:4
+(integer) 4
+127.0.0.1:6379> lrange Org:1:memebers 0 -1
+(empty array)
+127.0.0.1:6379> lrange Org:1:members 0 -1
+1) "Person:1"
+2) "Person:2"
+3) "Person:3"
+4) "Person:4"
+127.0.0.1:6379> brpop Org:1:members 5
+1) "Org:1:members"
+2) "Person:4"
+127.0.0.1:6379> bçpop Org:1:members 5
+(error) ERR unknown command `bçpop`, with args beginning with: `Org:1:members`, `5`, 
+127.0.0.1:6379> bl�pop Org:1:members 5
+(error) ERR unknown command `bl�pop`, with args beginning with: `Org:1:members`, `5`, 
+127.0.0.1:6379> blpop Org:1:members 5
+1) "Org:1:members"
+2) "Person:1"
+127.0.0.1:6379> lrange Org:1:members 0 -1
+1) "Person:2"
+2) "Person:3"
+127.0.0.1:6379> lrange Org:1:members 0 -1
+1) "Person:2"
+2) "Person:3"
+127.0.0.1:6379> hset b:3 name "CC"
+(integer) 1
+127.0.0.1:6379> hGet b:3 name 
+"CC"
+127.0.0.1:6379> hmset b:4 author ISBN
+OK
+127.0.0.1:6379> hmget b:4 author ISBN
+1) "ISBN"
+2) (nil)
+127.0.0.1:6379> hmset b:4 name "s5" author "kv"  copyrightYear 1969 ISBN 29960763
+OK
+127.0.0.1:6379> hmget b:4 author ISBN
+1) "kv"
+2) "29960763"
+127.0.0.1:6379> hgetall b:4
+1) "author"
+2) "kv"
+3) "name"
+4) "s5"
+5) "copyrightYear"
+6) "1969"
+7) "ISBN"
+8) "29960763"
+127.0.0.1:6379> hexists b:4 copyrightYear
+(integer) 1
+127.0.0.1:6379> hexists b:4 barcode
+(integer) 0
+127.0.0.1:6379> hlen b:4
+(integer) 4
+127.0.0.1:6379> hkeys b:4
+1) "author"
+2) "name"
+3) "copyrightYear"
+4) "ISBN"
+127.0.0.1:6379> hvals b:4
+1) "kv"
+2) "s5"
+3) "1969"
+4) "29960763"
+127.0.0.1:6379> hdel b:4 copyrigthYear
+(integer) 0
+127.0.0.1:6379> hdel b:4 copyrihghYear
+(integer) 0
+127.0.0.1:6379> hdel b:4 copyrighthYear
+(integer) 0
+127.0.0.1:6379> hdel b:4 copyrightYear
+(integer) 1
+127.0.0.1:6379> hgetall b:4
+1) "author"
+2) "kv"
+3) "name"
+4) "s5"
+5) "ISBN"
+6) "29960763"
+127.0.0.1:6379> hset b:4 copyrightYear 1111
+(integer) 1
+127.0.0.1:6379> hget b:4 copyrightYear
+"1111"
+127.0.0.1:6379> hincrby b:4 copyrightYear 1
+(integer) 1112
+127.0.0.1:6379> hget b:4 copyrightYear
+"1112"
+127.0.0.1:6379> set Org:5 "Beatles"
+OK
+127.0.0.1:6379> sadd Org:5:member Paul John George RIngo
+(integer) 4
+127.0.0.1:6379> smembers Org:5:member
+1) "John"
+2) "RIngo"
+3) "George"
+4) "Paul"
+127.0.0.1:6379> smembers Org:5:member
+1) "John"
+2) "RIngo"
+3) "George"
+4) "Paul"
+127.0.0.1:6379> sismember Org:5:member John
+(integer) 1
+127.0.0.1:6379> sismember Org:5:member Ralph
+(integer) 0
+127.0.0.1:6379> scard Org:5:member
+(integer) 4
+127.0.0.1:6379> set Org:6 "Wings"
+OK
+127.0.0.1:6379> set Org:6 "TW"
+OK
+127.0.0.1:6379> sadd Org:6:member Paul Linda Denny
+(integer) 3
+127.0.0.1:6379> sadd Org:7:member Bob George Jeff ROy Tom
+(integer) 5
+127.0.0.1:6379> sunion Org:5:member Org:6:member
+1) "Paul"
+2) "George"
+3) "Denny"
+4) "Linda"
+5) "John"
+6) "RIngo"
+127.0.0.1:6379> sunion Org:6:member Org:7:member
+1) "Denny"
+2) "Linda"
+3) "Tom"
+4) "George"
+5) "Bob"
+6) "Paul"
+7) "Jeff"
+8) "ROy"
+127.0.0.1:6379> sunion Org:6:member Org:7:member Org:8
+1) "Denny"
+2) "Linda"
+3) "Tom"
+4) "George"
+5) "Bob"
+6) "Paul"
+7) "Jeff"
+8) "ROy"
+127.0.0.1:6379> sinter Org:5:member Org:6:member
+1) "Paul"
+127.0.0.1:6379> siner Org:6:member Org:7:member
+(error) ERR unknown command `siner`, with args beginning with: `Org:6:member`, `Org:7:member`, 
+127.0.0.1:6379> sitner Org:6:member Org:7:member
+(error) ERR unknown command `sitner`, with args beginning with: `Org:6:member`, `Org:7:member`, 
+127.0.0.1:6379> sinter Org:6:member Org:7:member
+(empty array)
+127.0.0.1:6379> sdiff Org:5:member Org:6:member
+1) "John"
+2) "RIngo"
+3) "George"
+127.0.0.1:6379> sdiff Org:6:member Org:5:member
+1) "Denny"
+2) "Linda"
+127.0.0.1:6379> zadd copyrightYear 1996 b:1 2014 b:2 1999 b:3
+(integer) 3
+127.0.0.1:6379> zadd copyrightYear 1996 b:4
+(integer) 1
+127.0.0.1:6379> zrange copyrightYear 0 -1
+1) "b:1"
+2) "b:4"
+3) "b:3"
+4) "b:2"
+127.0.0.1:6379> zrange copyrightYear 0 -1 WITHSCORES
+1) "b:1"
+2) "1996"
+3) "b:4"
+4) "1996"
+5) "b:3"
+6) "1999"
+7) "b:2"
+8) "2014"
+127.0.0.1:6379> zrevrange copyrightYear 0 -1
+1) "b:2"
+2) "b:3"
+3) "b:4"
+4) "b:1"
+127.0.0.1:6379> zrevrange copyrightYear 0 -1 withscores
+1) "b:2"
+2) "2014"
+3) "b:3"
+4) "1999"
+5) "b:4"
+6) "1996"
+7) "b:1"
+8) "1996"
+127.0.0.1:6379> zadd b:names 0 "itw" 0 "cc"
+(integer) 2
+127.0.0.1:6379> zadd b:names 0 "tm, t" 0 "gr"
+(integer) 2
+127.0.0.1:6379> zrange b:names 0 -1 WITHSCORES
+1) "cc"
+2) "0"
+3) "gr"
+4) "0"
+5) "itw"
+6) "0"
+7) "tm, t"
+8) "0"
+127.0.0.1:6379> zverange b:names 0 -1 WITHSCORES
+(error) ERR unknown command `zverange`, with args beginning with: `b:names`, `0`, `-1`, `WITHSCORES`, 
+127.0.0.1:6379> zrank copyrigthYear b:3
+(nil)
+127.0.0.1:6379> zrank copyrightYear b:3
+(integer) 2
+127.0.0.1:6379> zrank copyrightYear b:1
+(integer) 0
+127.0.0.1:6379> zrank copyrightYear b:55
+(nil)
+127.0.0.1:6379> zscore copyrightYear b:3
+"1999"
+127.0.0.1:6379> zscore copyrightYear b:1
+"1996"
+127.0.0.1:6379> zrange copyrihtYear 0 -1 WITHSCORES
+(empty array)
+127.0.0.1:6379> zrange copyrightYear 0 -1 WITHSCORES
+1) "b:1"
+2) "1996"
+3) "b:4"
+4) "1996"
+5) "b:3"
+6) "1999"
+7) "b:2"
+8) "2014"
+127.0.0.1:6379> zcount copyrightYear 1900 1970
+(integer) 0
+127.0.0.1:6379> zcount copyrightYear 1900 1996
+(integer) 2
+127.0.0.1:6379> zrangebyscore copyrightYear 1900 1996 withscores
+1) "b:1"
+2) "1996"
+3) "b:4"
+4) "1996"
+127.0.0.1:6379> zrangebyscore copyrightYear -inf 2000 withscores
+1) "b:1"
+2) "1996"
+3) "b:4"
+4) "1996"
+5) "b:3"
+6) "1999"
+127.0.0.1:6379> zrangebyscore copyrightYear 1998 +inf withscores
+1) "b:3"
+2) "1999"
+3) "b:2"
+4) "2014"
+
