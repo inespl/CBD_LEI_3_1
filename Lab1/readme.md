@@ -1,4 +1,4 @@
-#REDIS
+# REDIS
 	Redis is an open-source NoSQL key-value datastore where instead of storing just one type of value, such as a string, more complex types of values can be stored. 
  -> Memoria associativa
  
