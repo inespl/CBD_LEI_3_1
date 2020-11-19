@@ -1,0 +1,539 @@
+ines@ines-HP-Pavilion-Laptop-14-ce0xxx:~/UA/CBD/Práticas/Lab 2$ mongo
+MongoDB shell version v4.4.1
+connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("cf1345d4-99af-4345-aff4-cbddf5dae8b5") }
+MongoDB server version: 4.4.1
+Welcome to the MongoDB shell.
+For interactive help, type "help".
+For more comprehensive documentation, see
+	https://docs.mongodb.com/
+Questions? Try the MongoDB Developer Community Forums
+	https://community.mongodb.com
+---
+The server generated these startup warnings when booting: 
+        2020-10-27T09:09:50.780+00:00: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine. See http://dochub.mongodb.org/core/prodnotes-filesystem
+        2020-10-27T09:09:51.466+00:00: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+---
+---
+        Enable MongoDB's free cloud-based monitoring service, which will then receive and display
+        metrics about your deployment (disk utilization, CPU, operation statistics, etc).
+
+        The monitoring data will be available on a MongoDB website with a unique URL accessible to you
+        and anyone you share the URL with. MongoDB may use this information to make product
+        improvements and to suggest MongoDB products and deployment options to you.
+
+        To enable free monitoring, run the following command: db.enableFreeMonitoring()
+        To permanently disable this reminder, run the following command: db.disableFreeMonitoring()
+---
+> mongo.exe
+uncaught exception: ReferenceError: mongo is not defined :
+@(shell):1:1
+> db.help()
+DB methods:
+	db.adminCommand(nameOrDocument) - switches to 'admin' db, and runs command [just calls db.runCommand(...)]
+	db.aggregate([pipeline], {options}) - performs a collectionless aggregation on this database; returns a cursor
+	db.auth(username, password)
+	db.cloneDatabase(fromhost) - will only function with MongoDB 4.0 and below
+	db.commandHelp(name) returns the help for the command
+	db.copyDatabase(fromdb, todb, fromhost) - will only function with MongoDB 4.0 and below
+	db.createCollection(name, {size: ..., capped: ..., max: ...})
+	db.createUser(userDocument)
+	db.createView(name, viewOn, [{$operator: {...}}, ...], {viewOptions})
+	db.currentOp() displays currently executing operations in the db
+	db.dropDatabase(writeConcern)
+	db.dropUser(username)
+	db.eval() - deprecated
+	db.fsyncLock() flush data to disk and lock server for backups
+	db.fsyncUnlock() unlocks server following a db.fsyncLock()
+	db.getCollection(cname) same as db['cname'] or db.cname
+	db.getCollectionInfos([filter]) - returns a list that contains the names and options of the db's collections
+	db.getCollectionNames()
+	db.getLastError() - just returns the err msg string
+	db.getLastErrorObj() - return full status object
+	db.getLogComponents()
+	db.getMongo() get the server connection object
+	db.getMongo().setSecondaryOk() allow queries on a replication secondary server
+	db.getName()
+	db.getProfilingLevel() - deprecated
+	db.getProfilingStatus() - returns if profiling is on and slow threshold
+	db.getReplicationInfo()
+	db.getSiblingDB(name) get the db at the same server as this one
+	db.getWriteConcern() - returns the write concern used for any operations on this db, inherited from server object if set
+	db.hostInfo() get details about the server's host
+	db.isMaster() check replica primary status
+	db.killOp(opid) kills the current operation in the db
+	db.listCommands() lists all the db commands
+	db.loadServerScripts() loads all the scripts in db.system.js
+	db.logout()
+	db.printCollectionStats()
+	db.printReplicationInfo()
+	db.printShardingStatus()
+	db.printSecondaryReplicationInfo()
+	db.resetError()
+	db.runCommand(cmdObj) run a database command.  if cmdObj is a string, turns it into {cmdObj: 1}
+	db.serverStatus()
+	db.setLogLevel(level,<component>)
+	db.setProfilingLevel(level,slowms) 0=off 1=slow 2=all
+	db.setVerboseShell(flag) display extra information in shell output
+	db.setWriteConcern(<write concern doc>) - sets the write concern for writes to the db
+	db.shutdownServer()
+	db.stats()
+	db.unsetWriteConcern(<write concern doc>) - unsets the write concern for writes to the db
+	db.version() current version of the server
+	db.watch() - opens a change stream cursor for a database to report on all  changes to its non-system collections.
+> DB Stats
+uncaught exception: SyntaxError: unexpected token: identifier :
+@(shell):1:3
+> db.stats()
+{
+	"db" : "test",
+	"collections" : 0,
+	"views" : 0,
+	"objects" : 0,
+	"avgObjSize" : 0,
+	"dataSize" : 0,
+	"storageSize" : 0,
+	"totalSize" : 0,
+	"indexes" : 0,
+	"indexSize" : 0,
+	"scaleFactor" : 1,
+	"fileSize" : 0,
+	"fsUsedSize" : 0,
+	"fsTotalSize" : 0,
+	"ok" : 1
+}
+> use mydb
+switched to db mydb
+> db
+mydb
+> show dbs
+admin   0.000GB
+config  0.000GB
+local   0.000GB
+> ^C
+bye
+ines@ines-HP-Pavilion-Laptop-14-ce0xxx:~/UA/CBD/Práticas/Lab 2$ mongo
+MongoDB shell version v4.4.1
+connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("d166fbe5-d6fd-4747-bb68-87150fbe42b7") }
+MongoDB server version: 4.4.1
+---
+The server generated these startup warnings when booting: 
+        2020-10-27T09:09:50.780+00:00: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine. See http://dochub.mongodb.org/core/prodnotes-filesystem
+        2020-10-27T09:09:51.466+00:00: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+---
+---
+        Enable MongoDB's free cloud-based monitoring service, which will then receive and display
+        metrics about your deployment (disk utilization, CPU, operation statistics, etc).
+
+        The monitoring data will be available on a MongoDB website with a unique URL accessible to you
+        and anyone you share the URL with. MongoDB may use this information to make product
+        improvements and to suggest MongoDB products and deployment options to you.
+
+        To enable free monitoring, run the following command: db.enableFreeMonitoring()
+        To permanently disable this reminder, run the following command: db.disableFreeMonitoring()
+---
+> db
+test
+> show dbs
+admin   0.000GB
+config  0.000GB
+local   0.000GB
+> use mybd
+switched to db mybd
+> db.movie.insert({"name":"ines"})
+WriteResult({ "nInserted" : 1 })
+> show dbs
+admin   0.000GB
+config  0.000GB
+local   0.000GB
+mybd    0.000GB
+> db.movie.insertOne({"name":"joao"})
+{
+	"acknowledged" : true,
+	"insertedId" : ObjectId("5f9804b79fe72c623aeae4fb")
+}
+> show dbs
+admin   0.000GB
+config  0.000GB
+local   0.000GB
+mybd    0.000GB
+> db.dropDatabase()
+{ "dropped" : "mybd", "ok" : 1 }
+> use mydb
+switched to db mydb
+> db.createCollection("myCol")
+{ "ok" : 1 }
+> show collections
+myCol
+> db.createCollection("mycol", { capped : true, autoIndexID : true, size : 6142800, max : 10000 } ){
+... "ok" : 0,
+... "errmsg" : "BSON field 'create.autoIndexID' is an unknown field.",
+... "code" : 40415,
+... "codeName" : "Location40415"
+... }
+uncaught exception: SyntaxError: unexpected token: '{' :
+@(shell):1:97
+> db.createCollection("mycollection", { capped : true, autoIndexID : true, size : 6142800, max : 10000 } )
+{
+	"ok" : 0,
+	"errmsg" : "BSON field 'create.autoIndexID' is an unknown field.",
+	"code" : 40415,
+	"codeName" : "Location40415"
+}
+> db.mycollection.drop()
+false
+> show collections
+myCol
+> db.createCollection("mycollection", { capped : true, autoIndexID : true, size : 6142800, max : 10000 } )
+{
+	"ok" : 0,
+	"errmsg" : "BSON field 'create.autoIndexID' is an unknown field.",
+	"code" : 40415,
+	"codeName" : "Location40415"
+}
+> show collections
+myCol
+> db.createCollection("col")
+{ "ok" : 1 }
+> show collections
+col
+myCol
+> db.createCollection("mycollection", { capped : true, autoIndexID : true, size : 6142800, max : 10000 } )
+{
+	"ok" : 0,
+	"errmsg" : "BSON field 'create.autoIndexID' is an unknown field.",
+	"code" : 40415,
+	"codeName" : "Location40415"
+}
+> show collections
+col
+myCol
+> db.createCollection("mycollection", { capped : true, size : 6142800, max : 10000 } )
+{ "ok" : 1 }
+> show collections
+col
+myCol
+mycollection
+> db.mycollection.drop()
+true
+> db.createCollection("post")
+{ "ok" : 1 }
+> db.post.insert([
+... {
+... title: "MongoDB Overview",
+... description: "MongoDB is no SQL database",
+... by: "tutorials point",
+... url: "http://www.tutorialspoint.com",
+... tags: ["mongodb", "database", "NoSQL"],
+... likes: 100
+... },
+... {
+... title: "NoSQL Database",
+... description: "NoSQL database doesn't have tables",
+... by: "tutorials point",
+... url: "http://www.tutorialspoint.com",
+... tags: ["mongodb", "database", "NoSQL"],
+... likes: 20,
+... comments: [
+... {
+... user:"user1",
+... message: "My first comment",
+... dateCreated: new Date(2013,11,10,2,35),
+... like: 0
+... }
+... ]
+... }
+... ])
+BulkWriteResult({
+	"writeErrors" : [ ],
+	"writeConcernErrors" : [ ],
+	"nInserted" : 2,
+	"nUpserted" : 0,
+	"nMatched" : 0,
+	"nModified" : 0,
+	"nRemoved" : 0,
+	"upserted" : [ ]
+})
+> db.post.save(document)
+uncaught exception: ReferenceError: document is not defined :
+@(shell):1:1
+> db.post.save()
+uncaught exception: Error: can't save a null :
+DBCollection.prototype.save@src/mongo/shell/collection.js:572:15
+@(shell):1:1
+> db.post.save({title: "NoSQL Database"})
+WriteResult({ "nInserted" : 1 })
+> db.cbd.insert({item:"evelopes", qty=100, type="clasp"})
+uncaught exception: SyntaxError: missing : after property id :
+@(shell):1:35
+> title: "NoSQL Database",
+[1]+  Stopped                 mongo
+ines@ines-HP-Pavilion-Laptop-14-ce0xxx:~/UA/CBD/Práticas/Lab 2$ mongo
+MongoDB shell version v4.4.1
+connecting to: mongodb://127.0.0.1:27017/?compressors=disabled&gssapiServiceName=mongodb
+Implicit session: session { "id" : UUID("c0ba4a87-1ac8-4697-98da-14fc12f341cb") }
+MongoDB server version: 4.4.1
+---
+The server generated these startup warnings when booting: 
+        2020-10-27T09:09:50.780+00:00: Using the XFS filesystem is strongly recommended with the WiredTiger storage engine. See http://dochub.mongodb.org/core/prodnotes-filesystem
+        2020-10-27T09:09:51.466+00:00: Access control is not enabled for the database. Read and write access to data and configuration is unrestricted
+---
+---
+        Enable MongoDB's free cloud-based monitoring service, which will then receive and display
+        metrics about your deployment (disk utilization, CPU, operation statistics, etc).
+
+        The monitoring data will be available on a MongoDB website with a unique URL accessible to you
+        and anyone you share the URL with. MongoDB may use this information to make product
+        improvements and to suggest MongoDB products and deployment options to you.
+
+        To enable free monitoring, run the following command: db.enableFreeMonitoring()
+        To permanently disable this reminder, run the following command: db.disableFreeMonitoring()
+---
+> use mybd
+switched to db mybd
+> show collections
+> db.products.insert( { item: "card", qty: 15 } )
+WriteResult({ "nInserted" : 1 })
+> <pre>db.cbd.insert({item:&quot;evelopes&quot;, qty=100, type=&quot;clasp&quot;})</pre>
+... 
+... ^C
+
+> db.products.insert( { item: "envelopes", qty: 100, type: "clasp" } )
+WriteResult({ "nInserted" : 1 })
+> 
+
+> use mybd
+switched to db mybd
+> show collections
+products
+> db.products.insert( { item: "envelopes", qty: 100, type: "clasp" } )
+WriteResult({ "nInserted" : 1 })
+> db.products.save( { item: "envelopes", qty: 100, type: "clasp" } )
+WriteResult({ "nInserted" : 1 })
+> db.products.find()
+{ "_id" : ObjectId("5f980cee66623c847032de5d"), "item" : "card", "qty" : 15 }
+{ "_id" : ObjectId("5f980d4e66623c847032de5e"), "item" : "envelopes", "qty" : 100, "type" : "clasp" }
+{ "_id" : ObjectId("5f980e77e3c61e9261e89bc5"), "item" : "envelopes", "qty" : 100, "type" : "clasp" }
+{ "_id" : ObjectId("5f980e80e3c61e9261e89bc6"), "item" : "envelopes", "qty" : 100, "type" : "clasp" }
+> db.products.findOne({item: "envelopes"})
+{
+	"_id" : ObjectId("5f980d4e66623c847032de5e"),
+	"item" : "envelopes",
+	"qty" : 100,
+	"type" : "clasp"
+}
+> db.products.insert( { item: "cartas", qty: 50, type: "abrir" } )
+WriteResult({ "nInserted" : 1 })
+> db.products.save( { item: "cartas", qty: 50, type: "abrir" } )
+WriteResult({ "nInserted" : 1 })
+> db.products.insert( { item: "yyy", qty: 500, type: "xxx" } )
+WriteResult({ "nInserted" : 1 })
+> db.products.insert( { item: "yyy", qty: 500, type: "xxx" } )
+WriteResult({ "nInserted" : 1 })
+> db.products.save( { item: "yyy", qty: 500, type: "xxx" } )
+WriteResult({ "nInserted" : 1 })
+> db.products.find()
+{ "_id" : ObjectId("5f980cee66623c847032de5d"), "item" : "card", "qty" : 15 }
+{ "_id" : ObjectId("5f980d4e66623c847032de5e"), "item" : "envelopes", "qty" : 100, "type" : "clasp" }
+{ "_id" : ObjectId("5f980e77e3c61e9261e89bc5"), "item" : "envelopes", "qty" : 100, "type" : "clasp" }
+{ "_id" : ObjectId("5f980e80e3c61e9261e89bc6"), "item" : "envelopes", "qty" : 100, "type" : "clasp" }
+{ "_id" : ObjectId("5f980f9ee3c61e9261e89bc7"), "item" : "cartas", "qty" : 50, "type" : "abrir" }
+{ "_id" : ObjectId("5f980fade3c61e9261e89bc8"), "item" : "cartas", "qty" : 50, "type" : "abrir" }
+{ "_id" : ObjectId("5f980fb9e3c61e9261e89bc9"), "item" : "yyy", "qty" : 500, "type" : "xxx" }
+{ "_id" : ObjectId("5f980fc1e3c61e9261e89bca"), "item" : "yyy", "qty" : 500, "type" : "xxx" }
+{ "_id" : ObjectId("5f980fcae3c61e9261e89bcb"), "item" : "yyy", "qty" : 500, "type" : "xxx" }
+> db.products.save( { item: "hhhh", qty: 10, type: "zzzz" } )
+WriteResult({ "nInserted" : 1 })
+> db.products.find()
+{ "_id" : ObjectId("5f980cee66623c847032de5d"), "item" : "card", "qty" : 15 }
+{ "_id" : ObjectId("5f980d4e66623c847032de5e"), "item" : "envelopes", "qty" : 100, "type" : "clasp" }
+{ "_id" : ObjectId("5f980e77e3c61e9261e89bc5"), "item" : "envelopes", "qty" : 100, "type" : "clasp" }
+{ "_id" : ObjectId("5f980e80e3c61e9261e89bc6"), "item" : "envelopes", "qty" : 100, "type" : "clasp" }
+{ "_id" : ObjectId("5f980f9ee3c61e9261e89bc7"), "item" : "cartas", "qty" : 50, "type" : "abrir" }
+{ "_id" : ObjectId("5f980fade3c61e9261e89bc8"), "item" : "cartas", "qty" : 50, "type" : "abrir" }
+{ "_id" : ObjectId("5f980fb9e3c61e9261e89bc9"), "item" : "yyy", "qty" : 500, "type" : "xxx" }
+{ "_id" : ObjectId("5f980fc1e3c61e9261e89bca"), "item" : "yyy", "qty" : 500, "type" : "xxx" }
+{ "_id" : ObjectId("5f980fcae3c61e9261e89bcb"), "item" : "yyy", "qty" : 500, "type" : "xxx" }
+{ "_id" : ObjectId("5f980ff6e3c61e9261e89bcc"), "item" : "hhhh", "qty" : 10, "type" : "zzzz" }
+> db.products.find({$or:[{item:"cartas"}, {qty:"500"}]})
+{ "_id" : ObjectId("5f980f9ee3c61e9261e89bc7"), "item" : "cartas", "qty" : 50, "type" : "abrir" }
+{ "_id" : ObjectId("5f980fade3c61e9261e89bc8"), "item" : "cartas", "qty" : 50, "type" : "abrir" }
+> db.products.find({$or:[{item:"cartas"}, {qty:"500"}]}).pretty()
+{
+	"_id" : ObjectId("5f980f9ee3c61e9261e89bc7"),
+	"item" : "cartas",
+	"qty" : 50,
+	"type" : "abrir"
+}
+{
+	"_id" : ObjectId("5f980fade3c61e9261e89bc8"),
+	"item" : "cartas",
+	"qty" : 50,
+	"type" : "abrir"
+}
+> db.products.save( { item: "cartas", qty: 500, type: "abrir" } )
+WriteResult({ "nInserted" : 1 })
+> db.products.find({$or:[{item:"cartas"}, {qty:"500"}]}).pretty()
+{
+	"_id" : ObjectId("5f980f9ee3c61e9261e89bc7"),
+	"item" : "cartas",
+	"qty" : 50,
+	"type" : "abrir"
+}
+{
+	"_id" : ObjectId("5f980fade3c61e9261e89bc8"),
+	"item" : "cartas",
+	"qty" : 50,
+	"type" : "abrir"
+}
+{
+	"_id" : ObjectId("5f981051e3c61e9261e89bcd"),
+	"item" : "cartas",
+	"qty" : 500,
+	"type" : "abrir"
+}
+> db.products.find({qty:{$gt:49}}).pretty()
+{
+	"_id" : ObjectId("5f980d4e66623c847032de5e"),
+	"item" : "envelopes",
+	"qty" : 100,
+	"type" : "clasp"
+}
+{
+	"_id" : ObjectId("5f980e77e3c61e9261e89bc5"),
+	"item" : "envelopes",
+	"qty" : 100,
+	"type" : "clasp"
+}
+{
+	"_id" : ObjectId("5f980e80e3c61e9261e89bc6"),
+	"item" : "envelopes",
+	"qty" : 100,
+	"type" : "clasp"
+}
+{
+	"_id" : ObjectId("5f980f9ee3c61e9261e89bc7"),
+	"item" : "cartas",
+	"qty" : 50,
+	"type" : "abrir"
+}
+{
+	"_id" : ObjectId("5f980fade3c61e9261e89bc8"),
+	"item" : "cartas",
+	"qty" : 50,
+	"type" : "abrir"
+}
+{
+	"_id" : ObjectId("5f980fb9e3c61e9261e89bc9"),
+	"item" : "yyy",
+	"qty" : 500,
+	"type" : "xxx"
+}
+{
+	"_id" : ObjectId("5f980fc1e3c61e9261e89bca"),
+	"item" : "yyy",
+	"qty" : 500,
+	"type" : "xxx"
+}
+{
+	"_id" : ObjectId("5f980fcae3c61e9261e89bcb"),
+	"item" : "yyy",
+	"qty" : 500,
+	"type" : "xxx"
+}
+{
+	"_id" : ObjectId("5f981051e3c61e9261e89bcd"),
+	"item" : "cartas",
+	"qty" : 500,
+	"type" : "abrir"
+}
+> db.products.remove( { qty: 50 } )
+WriteResult({ "nRemoved" : 2 })
+> db.products.find()
+{ "_id" : ObjectId("5f980cee66623c847032de5d"), "item" : "card", "qty" : 15 }
+{ "_id" : ObjectId("5f980d4e66623c847032de5e"), "item" : "envelopes", "qty" : 100, "type" : "clasp" }
+{ "_id" : ObjectId("5f980e77e3c61e9261e89bc5"), "item" : "envelopes", "qty" : 100, "type" : "clasp" }
+{ "_id" : ObjectId("5f980e80e3c61e9261e89bc6"), "item" : "envelopes", "qty" : 100, "type" : "clasp" }
+{ "_id" : ObjectId("5f980fb9e3c61e9261e89bc9"), "item" : "yyy", "qty" : 500, "type" : "xxx" }
+{ "_id" : ObjectId("5f980fc1e3c61e9261e89bca"), "item" : "yyy", "qty" : 500, "type" : "xxx" }
+{ "_id" : ObjectId("5f980fcae3c61e9261e89bcb"), "item" : "yyy", "qty" : 500, "type" : "xxx" }
+{ "_id" : ObjectId("5f980ff6e3c61e9261e89bcc"), "item" : "hhhh", "qty" : 10, "type" : "zzzz" }
+{ "_id" : ObjectId("5f981051e3c61e9261e89bcd"), "item" : "cartas", "qty" : 500, "type" : "abrir" }
+> db.products.remove( { qty: 100 } )
+WriteResult({ "nRemoved" : 3 })
+> db.products.find()
+{ "_id" : ObjectId("5f980cee66623c847032de5d"), "item" : "card", "qty" : 15 }
+{ "_id" : ObjectId("5f980fb9e3c61e9261e89bc9"), "item" : "yyy", "qty" : 500, "type" : "xxx" }
+{ "_id" : ObjectId("5f980fc1e3c61e9261e89bca"), "item" : "yyy", "qty" : 500, "type" : "xxx" }
+{ "_id" : ObjectId("5f980fcae3c61e9261e89bcb"), "item" : "yyy", "qty" : 500, "type" : "xxx" }
+{ "_id" : ObjectId("5f980ff6e3c61e9261e89bcc"), "item" : "hhhh", "qty" : 10, "type" : "zzzz" }
+{ "_id" : ObjectId("5f981051e3c61e9261e89bcd"), "item" : "cartas", "qty" : 500, "type" : "abrir" }
+> db.products.remove( { qty: 500 } )
+WriteResult({ "nRemoved" : 4 })
+> db.products.find()
+{ "_id" : ObjectId("5f980cee66623c847032de5d"), "item" : "card", "qty" : 15 }
+{ "_id" : ObjectId("5f980ff6e3c61e9261e89bcc"), "item" : "hhhh", "qty" : 10, "type" : "zzzz" }
+> db.products.save( { item: "cartas", qty: 500, type: "abrir" } )
+WriteResult({ "nInserted" : 1 })
+> db.products.save( { item: "yyy", qty: 500, type: "xxx" } )
+WriteResult({ "nInserted" : 1 })
+> db.products.find()
+{ "_id" : ObjectId("5f980cee66623c847032de5d"), "item" : "card", "qty" : 15 }
+{ "_id" : ObjectId("5f980ff6e3c61e9261e89bcc"), "item" : "hhhh", "qty" : 10, "type" : "zzzz" }
+{ "_id" : ObjectId("5f9810eee3c61e9261e89bce"), "item" : "cartas", "qty" : 500, "type" : "abrir" }
+{ "_id" : ObjectId("5f9810f6e3c61e9261e89bcf"), "item" : "yyy", "qty" : 500, "type" : "xxx" }
+> db.products.save( { item: "cartas", qty: 50, type: "fechar" } )
+WriteResult({ "nInserted" : 1 })
+> db.products.find({qty:{$gt:49}}).pretty()
+{
+	"_id" : ObjectId("5f9810eee3c61e9261e89bce"),
+	"item" : "cartas",
+	"qty" : 500,
+	"type" : "abrir"
+}
+{
+	"_id" : ObjectId("5f9810f6e3c61e9261e89bcf"),
+	"item" : "yyy",
+	"qty" : 500,
+	"type" : "xxx"
+}
+{
+	"_id" : ObjectId("5f98110be3c61e9261e89bd0"),
+	"item" : "cartas",
+	"qty" : 50,
+	"type" : "fechar"
+}
+> db.products.find({qty:{$lt:49}}).pretty()
+{
+	"_id" : ObjectId("5f980cee66623c847032de5d"),
+	"item" : "card",
+	"qty" : 15
+}
+{
+	"_id" : ObjectId("5f980ff6e3c61e9261e89bcc"),
+	"item" : "hhhh",
+	"qty" : 10,
+	"type" : "zzzz"
+}
+> db.products.find({ qty:{ $not: { $lt: 49} }}).pretty()
+{
+	"_id" : ObjectId("5f9810eee3c61e9261e89bce"),
+	"item" : "cartas",
+	"qty" : 500,
+	"type" : "abrir"
+}
+{
+	"_id" : ObjectId("5f9810f6e3c61e9261e89bcf"),
+	"item" : "yyy",
+	"qty" : 500,
+	"type" : "xxx"
+}
+{
+	"_id" : ObjectId("5f98110be3c61e9261e89bd0"),
+	"item" : "cartas",
+	"qty" : 50,
+	"type" : "fechar"
+}
+> 
+

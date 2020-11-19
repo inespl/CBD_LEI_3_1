@@ -1,0 +1,42 @@
+db.help()
+DB Stats
+db.stats()
+use mydb
+db
+show dbs
+use mybd
+show collections
+db.products.insert( { item: "card", qty: 15 } )
+db.products.insert( { item: "envelopes", qty: 100, type: "clasp" } )
+use mybd
+show collections
+db.products.insert( { item: "envelopes", qty: 100, type: "clasp" } )
+db.products.save( { item: "envelopes", qty: 100, type: "clasp" } )
+db.products.find()
+db.products.findOne({item: "envelopes"})
+db.products.insert( { item: "cartas", qty: 50, type: "abrir" } )
+db.products.save( { item: "cartas", qty: 50, type: "abrir" } )
+db.products.insert( { item: "yyy", qty: 500, type: "xxx" } )
+db.products.save( { item: "yyy", qty: 500, type: "xxx" } )
+db.products.find()
+db.products.save( { item: "hhhh", qty: 10, type: "zzzz" } )
+db.products.find()
+db.products.find({$or:[{item:"cartas"}, {qty:"500"}]})
+db.products.find({$or:[{item:"cartas"}, {qty:"500"}]}).pretty()
+db.products.save( { item: "cartas", qty: 500, type: "abrir" } )
+db.products.find({$or:[{item:"cartas"}, {qty:"500"}]}).pretty()
+db.products.find({qty:{$gt:49}}).pretty()
+db.products.remove( { qty: 50 } )
+db.products.find()
+db.products.remove( { qty: 100 } )
+db.products.find()
+db.products.remove( { qty: 500 } )
+db.products.find()
+db.products.save( { item: "cartas", qty: 500, type: "abrir" } )
+db.products.save( { item: "yyy", qty: 500, type: "xxx" } )
+db.products.find()
+db.products.save( { item: "cartas", qty: 50, type: "fechar" } )
+db.products.find({qty:{$gt:49}}).pretty()
+db.products.find({qty:{$lt:49}}).pretty()
+db.products.find({ qty:{ $not: { $lt: 49} }}).pretty()
+
