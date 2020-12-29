@@ -1,0 +1,173 @@
+cqlsh:videosharing> SELECT JSON * FROM users;
+
+ [json]
+--------------------------------------------------------------------------------------------------------------
+    {"username": "luisa", "email": "luisa@g.c", "name": "luisa", "red_timestamp": "2020-10-03 14:30:00.000Z"}
+          {"username": "ana", "email": "ana@g.c", "name": "ana", "red_timestamp": "2020-10-05 16:30:00.000Z"}
+ {"username": "miguel", "email": "miguel@g.c", "name": "miguel", "red_timestamp": "2020-10-09 20:30:00.000Z"}
+    {"username": "maria", "email": "maria@g.c", "name": "maria", "red_timestamp": "2020-10-01 12:30:00.000Z"}
+    {"username": "pedro", "email": "pedro@g.c", "name": "pedro", "red_timestamp": "2020-10-08 19:30:00.000Z"}
+    {"username": "laura", "email": "laura@g.c", "name": "laura", "red_timestamp": "2020-10-04 15:30:00.000Z"}
+       {"username": "joao", "email": "joao@g.c", "name": "joao", "red_timestamp": "2020-10-06 17:30:00.000Z"}
+       {"username": "jose", "email": "jose@g.c", "name": "jose", "red_timestamp": "2020-10-10 21:30:00.000Z"}
+    {"username": "joana", "email": "joana@g.c", "name": "joana", "red_timestamp": "2020-10-02 13:30:00.000Z"}
+    {"username": "manel", "email": "manel@g.c", "name": "manel", "red_timestamp": "2020-10-07 18:30:00.000Z"}
+
+(10 rows)
+cqlsh:videosharing> SELECT JSON * FROM videos;
+
+ [json]
+--------------------------------------------------------------------------------------------------------------------------------------------------------
+         {"id": 5, "up_timestamp": "2020-11-03 15:30:00.000Z", "author": "luisa", "description": "descVideo3", "tag": ["Braga"], "videoname": "video3"}
+ {"id": 10, "up_timestamp": "2020-11-08 20:30:00.000Z", "author": "pedro", "description": "descVideo8", "tag": ["Evora", "Sad"], "videoname": "video8"}
+ {"id": 11, "up_timestamp": "2020-11-09 21:30:00.000Z", "author": "miguel", "description": "descVideo9", "tag": ["Faro", "Fun"], "videoname": "video9"}
+ {"id": 1, "up_timestamp": "2020-11-01 13:30:00.000Z", "author": "maria", "description": "descVideo1", "tag": ["Aveiro", "Fun"], "videoname": "video1"}
+   {"id": 8, "up_timestamp": "2020-11-06 18:30:00.000Z", "author": "joao", "description": "descVideo6", "tag": ["Viseu", "Fun"], "videoname": "video6"}
+         {"id": 2, "up_timestamp": "2020-11-02 14:30:00.000Z", "author": "joana", "description": "descVideo2", "tag": ["Porto"], "videoname": "video2"}
+  {"id": 4, "up_timestamp": "2020-11-04 14:30:00.000Z", "author": "joana", "description": "descVideo4", "tag": ["Porto", "Sad"], "videoname": "video4"}
+        {"id": 7, "up_timestamp": "2020-11-05 17:30:00.000Z", "author": "ana", "description": "descVideo5", "tag": ["Santarem"], "videoname": "video5"}
+ {"id": 6, "up_timestamp": "2020-11-04 16:30:00.000Z", "author": "laura", "description": "descVideo4", "tag": ["Lisboa", "Sad"], "videoname": "video4"}
+        {"id": 9, "up_timestamp": "2020-11-07 19:30:00.000Z", "author": "manel", "description": "descVideo7", "tag": ["Guarda"], "videoname": "video7"}
+ {"id": 12, "up_timestamp": "2020-11-10 22:30:00.000Z", "author": "jose", "description": "descVideo10", "tag": ["Beja", "Sad"], "videoname": "video10"}
+  {"id": 3, "up_timestamp": "2020-11-03 14:30:00.000Z", "author": "joana", "description": "descVideo3", "tag": ["Porto", "Fun"], "videoname": "video3"}
+
+(12 rows)
+cqlsh:videosharing> SELECT JSON * FROM videosperauthor ;
+
+ [json]
+----------------------------------------------------------------------------
+   {"author": "luisa", "up_timestamp": "2020-11-03 15:30:00.000Z", "id": 5}
+     {"author": "ana", "up_timestamp": "2020-11-05 17:30:00.000Z", "id": 7}
+ {"author": "miguel", "up_timestamp": "2020-11-09 21:30:00.000Z", "id": 11}
+   {"author": "maria", "up_timestamp": "2020-11-01 13:30:00.000Z", "id": 1}
+  {"author": "pedro", "up_timestamp": "2020-11-08 20:30:00.000Z", "id": 10}
+   {"author": "laura", "up_timestamp": "2020-11-04 16:30:00.000Z", "id": 6}
+    {"author": "joao", "up_timestamp": "2020-11-06 18:30:00.000Z", "id": 8}
+   {"author": "jose", "up_timestamp": "2020-11-10 22:30:00.000Z", "id": 12}
+   {"author": "joana", "up_timestamp": "2020-11-04 14:30:00.000Z", "id": 4}
+   {"author": "joana", "up_timestamp": "2020-11-03 14:30:00.000Z", "id": 3}
+   {"author": "joana", "up_timestamp": "2020-11-02 14:30:00.000Z", "id": 2}
+   {"author": "manel", "up_timestamp": "2020-11-07 19:30:00.000Z", "id": 9}
+
+(12 rows)
+cqlsh:videosharing> SELECT JSON * FROM videospertag ;
+
+ [json]
+------------------------------
+ {"tag": "Santarem", "id": 7}
+   {"tag": "Evora", "id": 10}
+    {"tag": "Faro", "id": 11}
+   {"tag": "Lisboa", "id": 6}
+   {"tag": "Aveiro", "id": 1}
+    {"tag": "Porto", "id": 4}
+     {"tag": "Fun", "id": 11}
+   {"tag": "Guarda", "id": 9}
+    {"tag": "Viseu", "id": 8}
+     {"tag": "Sad", "id": 12}
+    {"tag": "Braga", "id": 5}
+    {"tag": "Beja", "id": 12}
+
+(12 rows)
+cqlsh:videosharing> SELECT JSON * FROM tagspervideo  ;
+
+ [json]
+---------------------------------------------------------------------------------
+         {"id": 5, "tag": ["Braga"], "up_timestamp": "2020-11-03 15:30:00.000Z"}
+ {"id": 10, "tag": ["Evora", "Sad"], "up_timestamp": "2020-11-08 20:30:00.000Z"}
+  {"id": 11, "tag": ["Faro", "Fun"], "up_timestamp": "2020-11-09 21:30:00.000Z"}
+ {"id": 1, "tag": ["Aveiro", "Fun"], "up_timestamp": "2020-11-01 13:30:00.000Z"}
+  {"id": 8, "tag": ["Viseu", "Fun"], "up_timestamp": "2020-11-06 18:30:00.000Z"}
+         {"id": 2, "tag": ["Porto"], "up_timestamp": "2020-11-02 14:30:00.000Z"}
+  {"id": 4, "tag": ["Porto", "Sad"], "up_timestamp": "2020-11-04 14:30:00.000Z"}
+      {"id": 7, "tag": ["Santarem"], "up_timestamp": "2020-11-05 17:30:00.000Z"}
+ {"id": 6, "tag": ["Lisboa", "Sad"], "up_timestamp": "2020-11-04 16:30:00.000Z"}
+        {"id": 9, "tag": ["Guarda"], "up_timestamp": "2020-11-07 19:30:00.000Z"}
+  {"id": 12, "tag": ["Beja", "Sad"], "up_timestamp": "2020-11-10 22:30:00.000Z"}
+  {"id": 3, "tag": ["Porto", "Fun"], "up_timestamp": "2020-11-03 14:30:00.000Z"}
+
+(12 rows)
+cqlsh:videosharing> SELECT JSON * FROM commentspervideo ;
+
+ [json]
+-----------------------------------------------------------------------------------------
+       {"videoid": 5, "comment_date": "2020-11-03", "author": "luisa", "comment": "meh"}
+     {"videoid": 10, "comment_date": "2020-11-09", "author": "pedro", "comment": "good"}
+   {"videoid": 11, "comment_date": "2020-11-10", "author": "miguel", "comment": "great"}
+      {"videoid": 1, "comment_date": "2020-11-02", "author": "maria", "comment": "good"}
+  {"videoid": 8, "comment_date": "2020-11-07", "author": "joao", "comment": "fantastic"}
+       {"videoid": 2, "comment_date": "2020-11-03", "author": "joana", "comment": "bad"}
+  {"videoid": 4, "comment_date": "2020-11-05", "author": "joana", "comment": "very bad"}
+     {"videoid": 7, "comment_date": "2020-11-06", "author": "ana", "comment": "like it"}
+     {"videoid": 6, "comment_date": "2020-11-05", "author": "laura", "comment": "awful"}
+       {"videoid": 9, "comment_date": "2020-11-08", "author": "manel", "comment": "bad"}
+      {"videoid": 12, "comment_date": "2020-11-11", "author": "jose", "comment": "good"}
+ {"videoid": 3, "comment_date": "2020-11-04", "author": "joana", "comment": "very good"}
+
+(12 rows)
+cqlsh:videosharing> SELECT JSON * FROM commentsperuser  ;
+
+ [json]
+-----------------------------------------------------------------------------------------
+       {"author": "luisa", "comment_date": "2020-11-03", "comment": "meh", "videoid": 5}
+     {"author": "ana", "comment_date": "2020-11-06", "comment": "like it", "videoid": 7}
+   {"author": "miguel", "comment_date": "2020-11-10", "comment": "great", "videoid": 11}
+      {"author": "maria", "comment_date": "2020-11-02", "comment": "good", "videoid": 1}
+     {"author": "pedro", "comment_date": "2020-11-09", "comment": "good", "videoid": 10}
+     {"author": "laura", "comment_date": "2020-11-05", "comment": "awful", "videoid": 6}
+  {"author": "joao", "comment_date": "2020-11-07", "comment": "fantastic", "videoid": 8}
+      {"author": "jose", "comment_date": "2020-11-11", "comment": "good", "videoid": 12}
+ {"author": "joana", "comment_date": "2020-11-04", "comment": "very good", "videoid": 3}
+       {"author": "joana", "comment_date": "2020-11-03", "comment": "bad", "videoid": 2}
+       {"author": "manel", "comment_date": "2020-11-08", "comment": "bad", "videoid": 9}
+
+(11 rows)
+cqlsh:videosharing> SELECT JSON * FROM video_followers ;
+
+ [json]
+-----------------------------------
+   {"videoid": 5, "user": "luisa"}
+  {"videoid": 10, "user": "pedro"}
+ {"videoid": 11, "user": "miguel"}
+   {"videoid": 1, "user": "maria"}
+    {"videoid": 8, "user": "joao"}
+   {"videoid": 2, "user": "joana"}
+     {"videoid": 7, "user": "ana"}
+   {"videoid": 6, "user": "laura"}
+   {"videoid": 9, "user": "manel"}
+   {"videoid": 12, "user": "jose"}
+   {"videoid": 3, "user": "joana"}
+
+(11 rows)
+cqlsh:videosharing> SELECT JSON * FROM events ;
+
+ [json]
+------------------------------------------------------------------------------------------------------------------------------
+ {"user": "joana", "videoid": 2, "event_timestamp": "2020-11-03 14:40:00.000Z", "event_duration": 3600, "event_type": "stop"}
+  {"user": "joana", "videoid": 2, "event_timestamp": "2020-11-03 14:30:00.000Z", "event_duration": 600, "event_type": "play"}
+ {"user": "luisa", "videoid": 5, "event_timestamp": "2020-11-04 21:30:00.000Z", "event_duration": 3600, "event_type": "stop"}
+ {"user": "luisa", "videoid": 5, "event_timestamp": "2020-11-04 20:30:00.000Z", "event_duration": 3600, "event_type": "play"}
+ {"user": "joana", "videoid": 3, "event_timestamp": "2020-11-04 15:30:00.000Z", "event_duration": 1800, "event_type": "play"}
+ {"user": "joana", "videoid": 3, "event_timestamp": "2020-11-03 16:00:00.000Z", "event_duration": 600, "event_type": "pause"}
+ {"user": "maria", "videoid": 1, "event_timestamp": "2020-11-02 14:30:00.000Z", "event_duration": 600, "event_type": "pause"}
+ {"user": "maria", "videoid": 1, "event_timestamp": "2020-11-02 13:30:00.000Z", "event_duration": 3600, "event_type": "play"}
+
+(8 rows)
+cqlsh:videosharing> SELECT JSON * FROM ratingpervideo ;
+
+ [json]
+----------------------------------------
+   {"videoid": 5, "rating": 4, "id": 5}
+ {"videoid": 10, "rating": 2, "id": 10}
+ {"videoid": 11, "rating": 5, "id": 11}
+   {"videoid": 8, "rating": 3, "id": 8}
+   {"videoid": 2, "rating": 2, "id": 2}
+   {"videoid": 4, "rating": 5, "id": 3}
+   {"videoid": 7, "rating": 5, "id": 7}
+   {"videoid": 6, "rating": 2, "id": 6}
+   {"videoid": 9, "rating": 4, "id": 9}
+ {"videoid": 12, "rating": 3, "id": 12}
+   {"videoid": 3, "rating": 4, "id": 1}
+   {"videoid": 3, "rating": 3, "id": 4}
+
+(12 rows)
+cqlsh:videosharing>

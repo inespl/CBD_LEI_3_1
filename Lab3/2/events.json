@@ -1,0 +1,8 @@
+{"user": "joana", "videoid": 2, "event_timestamp": "2020-11-03 14:40:00.000Z", "event_duration": 3600, "event_type": "stop"}
+  {"user": "joana", "videoid": 2, "event_timestamp": "2020-11-03 14:30:00.000Z", "event_duration": 600, "event_type": "play"}
+ {"user": "luisa", "videoid": 5, "event_timestamp": "2020-11-04 21:30:00.000Z", "event_duration": 3600, "event_type": "stop"}
+ {"user": "luisa", "videoid": 5, "event_timestamp": "2020-11-04 20:30:00.000Z", "event_duration": 3600, "event_type": "play"}
+ {"user": "joana", "videoid": 3, "event_timestamp": "2020-11-04 15:30:00.000Z", "event_duration": 1800, "event_type": "play"}
+ {"user": "joana", "videoid": 3, "event_timestamp": "2020-11-03 16:00:00.000Z", "event_duration": 600, "event_type": "pause"}
+ {"user": "maria", "videoid": 1, "event_timestamp": "2020-11-02 14:30:00.000Z", "event_duration": 600, "event_type": "pause"}
+ {"user": "maria", "videoid": 1, "event_timestamp": "2020-11-02 13:30:00.000Z", "event_duration": 3600, "event_type": "play"}

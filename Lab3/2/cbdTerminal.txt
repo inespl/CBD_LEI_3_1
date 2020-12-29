@@ -1,0 +1,525 @@
+cqlsh:xx> CREATE KEYSPACE VideoSharing WITH replication = {'class': 'SimpleStrategy', 'replication_factor':3};
+cqlsh:xx> use videosharing ;
+cqlsh:videosharing> CREATE TABLE users (username text, name text, email text, red_timestamp timestamp, PRIMARY KEY (username));
+cqlsh:videosharing> INSERT INTO users (username, name, email, red_timestamp) VALUES ('maria', 'maria', 'maria@g.c', '2020-10-01 13:30:00.000');
+cqlsh:videosharing> INSERT INTO users (username, name, email, red_timestamp) VALUES ('joana', 'joana', 'joana@g.c', '2020-10-02 14:30:00.000');
+cqlsh:videosharing> INSERT INTO users (username, name, email, red_timestamp) VALUES ('luisa', 'luisa', 'luisa@g.c', '2020-10-03 15:30:00.000');
+cqlsh:videosharing> INSERT INTO users (username, name, email, red_timestamp) VALUES ('laura', 'laura', 'laura@g.c', '2020-10-04 16:30:00.000');
+cqlsh:videosharing> INSERT INTO users (username, name, email, red_timestamp) VALUES ('ana', 'ana', 'ana@g.c', '2020-10-05 17:30:00.000');
+cqlsh:videosharing> INSERT INTO users (username, name, email, red_timestamp) VALUES ('joao', 'joao', 'joao@g.c', '2020-10-06 18:30:00.000');
+cqlsh:videosharing> INSERT INTO users (username, name, email, red_timestamp) VALUES ('manel', 'manel', 'manel@g.c', '2020-10-07 19:30:00.000');
+cqlsh:videosharing> INSERT INTO users (username, name, email, red_timestamp) VALUES ('pedro', 'pedro', 'pedro@g.c', '2020-10-08 20:30:00.000');
+cqlsh:videosharing> INSERT INTO users (username, name, email, red_timestamp) VALUES ('miguel', 'miguel', 'miguel@g.c', '2020-10-09 21:30:00.000');
+cqlsh:videosharing> INSERT INTO users (username, name, email, red_timestamp) VALUES ('jose', 'jose', 'jose@g.c', '2020-10-10 22:30:00.000');
+cqlsh:videosharing> 
+cqlsh:videosharing> SELECT * FROM users ;
+
+ username | email      | name   | red_timestamp
+----------+------------+--------+---------------------------------
+    luisa |  luisa@g.c |  luisa | 2020-10-03 14:30:00.000000+0000
+      ana |    ana@g.c |    ana | 2020-10-05 16:30:00.000000+0000
+   miguel | miguel@g.c | miguel | 2020-10-09 20:30:00.000000+0000
+    maria |  maria@g.c |  maria | 2020-10-01 12:30:00.000000+0000
+    pedro |  pedro@g.c |  pedro | 2020-10-08 19:30:00.000000+0000
+    laura |  laura@g.c |  laura | 2020-10-04 15:30:00.000000+0000
+     joao |   joao@g.c |   joao | 2020-10-06 17:30:00.000000+0000
+     jose |   jose@g.c |   jose | 2020-10-10 21:30:00.000000+0000
+    joana |  joana@g.c |  joana | 2020-10-02 13:30:00.000000+0000
+    manel |  manel@g.c |  manel | 2020-10-07 18:30:00.000000+0000
+
+(10 rows)
+cqlsh:videosharing> CREATE TABLE videos (id int, author text, videoname text, description text, tag list<text>, up_timestamp timestamp, PRIMARY KEY (id, up_timestamp)) WITH CLUSTERING ORDER BY (up_timestamp DESC);
+cqlsh:videosharing> 
+cqlsh:videosharing> INSERT INTO videos (id, author, videoname, description, tag, up_timestamp) VALUES (1, 'maria', 'video1', 'descVideo1', ['Aveiro', 'Fun'], '2020-11-01 13:30:00.000');
+cqlsh:videosharing> INSERT INTO videos (id, author, videoname, description, tag, up_timestamp) VALUES (2, 'joana', 'video2', 'descVideo2', ['Porto'], '2020-11-02 14:30:00.000');
+cqlsh:videosharing> INSERT INTO videos (id, author, videoname, description, tag, up_timestamp) VALUES (3, 'joana', 'video3', 'descVideo3', ['Porto', 'Fun'], '2020-11-03 14:30:00.000');
+cqlsh:videosharing> INSERT INTO videos (id, author, videoname, description, tag, up_timestamp) VALUES (4, 'joana', 'video4', 'descVideo4', ['Porto', 'Sad'], '2020-11-04 14:30:00.000');
+cqlsh:videosharing> INSERT INTO videos (id, author, videoname, description, tag, up_timestamp) VALUES (5, 'luisa', 'video3', 'descVideo3', ['Braga'], '2020-11-03 15:30:00.000');
+cqlsh:videosharing> INSERT INTO videos (id, author, videoname, description, tag, up_timestamp) VALUES (6, 'laura', 'video4', 'descVideo4', ['Lisboa', 'Sad'], '2020-11-04 16:30:00.000');
+cqlsh:videosharing> INSERT INTO videos (id, author, videoname, description, tag, up_timestamp) VALUES (7, 'ana', 'video5', 'descVideo5', ['Santarem'], '2020-11-05 17:30:00.000');
+cqlsh:videosharing> INSERT INTO videos (id, author, videoname, description, tag, up_timestamp) VALUES (8, 'joao', 'video6', 'descVideo6', ['Viseu', 'Fun'], '2020-11-06 18:30:00.000');
+cqlsh:videosharing> INSERT INTO videos (id, author, videoname, description, tag, up_timestamp) VALUES (9, 'manel', 'video7', 'descVideo7', ['Guarda'], '2020-11-07 19:30:00.000');
+cqlsh:videosharing> INSERT INTO videos (id, author, videoname, description, tag, up_timestamp) VALUES (10, 'pedro', 'video8', 'descVideo8', ['Evora', 'Sad'], '2020-11-08 20:30:00.000');
+cqlsh:videosharing> INSERT INTO videos (id, author, videoname, description, tag, up_timestamp) VALUES (11, 'miguel', 'video9', 'descVideo9', ['Faro', 'Fun'], '2020-11-09 21:30:00.000');
+cqlsh:videosharing> INSERT INTO videos (id, author, videoname, description, tag, up_timestamp) VALUES (12, 'jose', 'video10', 'descVideo10', ['Beja', 'Sad'], '2020-11-10 22:30:00.000');
+cqlsh:videosharing> 
+cqlsh:videosharing> SELECT * FROM videos;
+
+ id | up_timestamp                    | author | description | tag               | videoname
+----+---------------------------------+--------+-------------+-------------------+-----------
+  5 | 2020-11-03 15:30:00.000000+0000 |  luisa |  descVideo3 |         ['Braga'] |    video3
+ 10 | 2020-11-08 20:30:00.000000+0000 |  pedro |  descVideo8 |  ['Evora', 'Sad'] |    video8
+ 11 | 2020-11-09 21:30:00.000000+0000 | miguel |  descVideo9 |   ['Faro', 'Fun'] |    video9
+  1 | 2020-11-01 13:30:00.000000+0000 |  maria |  descVideo1 | ['Aveiro', 'Fun'] |    video1
+  8 | 2020-11-06 18:30:00.000000+0000 |   joao |  descVideo6 |  ['Viseu', 'Fun'] |    video6
+  2 | 2020-11-02 14:30:00.000000+0000 |  joana |  descVideo2 |         ['Porto'] |    video2
+  4 | 2020-11-04 14:30:00.000000+0000 |  joana |  descVideo4 |  ['Porto', 'Sad'] |    video4
+  7 | 2020-11-05 17:30:00.000000+0000 |    ana |  descVideo5 |      ['Santarem'] |    video5
+  6 | 2020-11-04 16:30:00.000000+0000 |  laura |  descVideo4 | ['Lisboa', 'Sad'] |    video4
+  9 | 2020-11-07 19:30:00.000000+0000 |  manel |  descVideo7 |        ['Guarda'] |    video7
+ 12 | 2020-11-10 22:30:00.000000+0000 |   jose | descVideo10 |   ['Beja', 'Sad'] |   video10
+  3 | 2020-11-03 14:30:00.000000+0000 |  joana |  descVideo3 |  ['Porto', 'Fun'] |    video3
+
+(12 rows)
+cqlsh:videosharing> CREATE TABLE videosPerAuthor (id int, author text, up_timestamp timestamp, PRIMARY KEY (author, up_timestamp)) WITH CLUSTERING ORDER BY (up_timestamp DESC);
+cqlsh:videosharing> 
+cqlsh:videosharing> INSERT INTO videosPerAuthor (id, author, up_timestamp) VALUES (1, 'maria', '2020-11-01 13:30:00.000');
+cqlsh:videosharing> INSERT INTO videosPerAuthor (id, author, up_timestamp) VALUES (2, 'joana', '2020-11-02 14:30:00.000');
+cqlsh:videosharing> INSERT INTO videosPerAuthor (id, author, up_timestamp) VALUES (3, 'joana', '2020-11-03 14:30:00.000');
+cqlsh:videosharing> INSERT INTO videosPerAuthor (id, author, up_timestamp) VALUES (4, 'joana', '2020-11-04 14:30:00.000');
+cqlsh:videosharing> INSERT INTO videosPerAuthor (id, author, up_timestamp) VALUES (5, 'luisa', '2020-11-03 15:30:00.000');
+cqlsh:videosharing> INSERT INTO videosPerAuthor (id, author, up_timestamp) VALUES (6, 'laura', '2020-11-04 16:30:00.000');
+cqlsh:videosharing> INSERT INTO videosPerAuthor (id, author, up_timestamp) VALUES (7, 'ana', '2020-11-05 17:30:00.000');
+cqlsh:videosharing> INSERT INTO videosPerAuthor (id, author, up_timestamp) VALUES (8, 'joao', '2020-11-06 18:30:00.000');
+cqlsh:videosharing> INSERT INTO videosPerAuthor (id, author, up_timestamp) VALUES (9, 'manel', '2020-11-07 19:30:00.000');
+cqlsh:videosharing> INSERT INTO videosPerAuthor (id, author, up_timestamp) VALUES (10, 'pedro', '2020-11-08 20:30:00.000');
+cqlsh:videosharing> INSERT INTO videosPerAuthor (id, author, up_timestamp) VALUES (11, 'miguel', '2020-11-09 21:30:00.000');
+cqlsh:videosharing> INSERT INTO videosPerAuthor (id, author, up_timestamp) VALUES (12, 'jose', '2020-11-10 22:30:00.000');
+cqlsh:videosharing> 
+cqlsh:videosharing> SELECT * FROM videosPerAuthor;
+
+ author | id | up_timestamp
+--------+----+---------------------------------
+  luisa |  5 | 2020-11-03 15:30:00.000000+0000
+    ana |  7 | 2020-11-05 17:30:00.000000+0000
+ miguel | 11 | 2020-11-09 21:30:00.000000+0000
+  maria |  1 | 2020-11-01 13:30:00.000000+0000
+  pedro | 10 | 2020-11-08 20:30:00.000000+0000
+  laura |  6 | 2020-11-04 16:30:00.000000+0000
+   joao |  8 | 2020-11-06 18:30:00.000000+0000
+   jose | 12 | 2020-11-10 22:30:00.000000+0000
+  joana |  2 | 2020-11-02 14:30:00.000000+0000
+  joana |  3 | 2020-11-03 14:30:00.000000+0000
+  joana |  4 | 2020-11-04 14:30:00.000000+0000
+  manel |  9 | 2020-11-07 19:30:00.000000+0000
+
+(12 rows)
+cqlsh:videosharing> CREATE TABLE tagsPerVideo (id int, tag list<text>, up_timestamp timestamp, PRIMARY KEY (id));
+cqlsh:videosharing> 
+cqlsh:videosharing> INSERT INTO tagsPerVideo (id, tag, up_timestamp) VALUES (1, ['Aveiro', 'Fun'], '2020-11-01 13:30:00.000');
+cqlsh:videosharing> INSERT INTO tagsPerVideo (id, tag, up_timestamp) VALUES (2, ['Porto'], '2020-11-02 14:30:00.000');
+cqlsh:videosharing> INSERT INTO tagsPerVideo (id, tag, up_timestamp) VALUES (3, ['Porto', 'Fun'], '2020-11-03 14:30:00.000');
+cqlsh:videosharing> INSERT INTO tagsPerVideo (id, tag, up_timestamp) VALUES (4, ['Porto', 'Sad'], '2020-11-04 14:30:00.000');
+cqlsh:videosharing> INSERT INTO tagsPerVideo (id, tag, up_timestamp) VALUES (5, ['Braga'], '2020-11-03 15:30:00.000');
+cqlsh:videosharing> INSERT INTO tagsPerVideo (id, tag, up_timestamp) VALUES (6, ['Lisboa', 'Sad'], '2020-11-04 16:30:00.000');
+cqlsh:videosharing> INSERT INTO tagsPerVideo (id, tag, up_timestamp) VALUES (7, ['Santarem'], '2020-11-05 17:30:00.000');
+cqlsh:videosharing> INSERT INTO tagsPerVideo (id, tag, up_timestamp) VALUES (8, ['Viseu', 'Fun'], '2020-11-06 18:30:00.000');
+cqlsh:videosharing> INSERT INTO tagsPerVideo (id, tag, up_timestamp) VALUES (9, ['Guarda'], '2020-11-07 19:30:00.000');
+cqlsh:videosharing> INSERT INTO tagsPerVideo (id, tag, up_timestamp) VALUES (10, ['Evora', 'Sad'], '2020-11-08 20:30:00.000');
+cqlsh:videosharing> INSERT INTO tagsPerVideo (id, tag, up_timestamp) VALUES (11, ['Faro', 'Fun'], '2020-11-09 21:30:00.000');
+cqlsh:videosharing> INSERT INTO tagsPerVideo (id, tag, up_timestamp) VALUES (12, ['Beja', 'Sad'], '2020-11-10 22:30:00.000');
+cqlsh:videosharing> 
+cqlsh:videosharing> SELECT * FROM tagsPerVideo;
+
+ id | tag               | up_timestamp
+----+-------------------+---------------------------------
+  5 |         ['Braga'] | 2020-11-03 15:30:00.000000+0000
+ 10 |  ['Evora', 'Sad'] | 2020-11-08 20:30:00.000000+0000
+ 11 |   ['Faro', 'Fun'] | 2020-11-09 21:30:00.000000+0000
+  1 | ['Aveiro', 'Fun'] | 2020-11-01 13:30:00.000000+0000
+  8 |  ['Viseu', 'Fun'] | 2020-11-06 18:30:00.000000+0000
+  2 |         ['Porto'] | 2020-11-02 14:30:00.000000+0000
+  4 |  ['Porto', 'Sad'] | 2020-11-04 14:30:00.000000+0000
+  7 |      ['Santarem'] | 2020-11-05 17:30:00.000000+0000
+  6 | ['Lisboa', 'Sad'] | 2020-11-04 16:30:00.000000+0000
+  9 |        ['Guarda'] | 2020-11-07 19:30:00.000000+0000
+ 12 |   ['Beja', 'Sad'] | 2020-11-10 22:30:00.000000+0000
+  3 |  ['Porto', 'Fun'] | 2020-11-03 14:30:00.000000+0000
+
+(12 rows)
+cqlsh:videosharing> CREATE TABLE videosPerTag (id int, tag text, PRIMARY KEY (tag));
+cqlsh:videosharing> 
+cqlsh:videosharing> INSERT INTO videosPerTag (id, tag) VALUES (1, 'Aveiro');
+cqlsh:videosharing> INSERT INTO videosPerTag (id, tag) VALUES (1, 'Fun');
+cqlsh:videosharing> INSERT INTO videosPerTag (id, tag) VALUES (2, 'Porto');
+cqlsh:videosharing> INSERT INTO videosPerTag (id, tag) VALUES (3, 'Porto');
+cqlsh:videosharing> INSERT INTO videosPerTag (id, tag) VALUES (3, 'Fun');
+cqlsh:videosharing> INSERT INTO videosPerTag (id, tag) VALUES (4, 'Porto');
+cqlsh:videosharing> INSERT INTO videosPerTag (id, tag) VALUES (4, 'Sad');
+cqlsh:videosharing> INSERT INTO videosPerTag (id, tag) VALUES (5, 'Braga');
+cqlsh:videosharing> INSERT INTO videosPerTag (id, tag) VALUES (6, 'Lisboa');
+cqlsh:videosharing> INSERT INTO videosPerTag (id, tag) VALUES (6, 'Sad');
+cqlsh:videosharing> INSERT INTO videosPerTag (id, tag) VALUES (7, 'Santarem');
+cqlsh:videosharing> INSERT INTO videosPerTag (id, tag) VALUES (8, 'Viseu');
+cqlsh:videosharing> INSERT INTO videosPerTag (id, tag) VALUES (8, 'Fun');
+cqlsh:videosharing> INSERT INTO videosPerTag (id, tag) VALUES (9, 'Guarda');
+cqlsh:videosharing> INSERT INTO videosPerTag (id, tag) VALUES (10, 'Evora');
+cqlsh:videosharing> INSERT INTO videosPerTag (id, tag) VALUES (10, 'Sad');
+cqlsh:videosharing> INSERT INTO videosPerTag (id, tag) VALUES (11, 'Faro');
+cqlsh:videosharing> INSERT INTO videosPerTag (id, tag) VALUES (11, 'Fun');
+cqlsh:videosharing> INSERT INTO videosPerTag (id, tag) VALUES (12, 'Beja');
+cqlsh:videosharing> INSERT INTO videosPerTag (id, tag) VALUES (12, 'Sad');
+cqlsh:videosharing> 
+cqlsh:videosharing> 
+cqlsh:videosharing> SELECT * FROM videosPerTag;
+
+ tag      | id
+----------+----
+ Santarem |  7
+    Evora | 10
+     Faro | 11
+   Lisboa |  6
+   Aveiro |  1
+    Porto |  4
+      Fun | 11
+   Guarda |  9
+    Viseu |  8
+      Sad | 12
+    Braga |  5
+     Beja | 12
+
+(12 rows)
+
+
+cqlsh:videosharing> CREATE TABLE commentsPerVideo (comment text, author text, videoID int, comment_date date, PRIMARY KEY (videoID, comment_date)) WITH CLUSTERING ORDER BY (comment_date DESC);
+cqlsh:videosharing> INSERT INTO commentsPerVideo (comment, author, videoID, comment_date) VALUES ('good','maria', 1, '2020-11-02');
+cqlsh:videosharing> INSERT INTO commentsPerVideo (comment, author, videoID, comment_date) VALUES ('bad', 'joana', 2, '2020-11-03');
+cqlsh:videosharing> INSERT INTO commentsPerVideo (comment, author, videoID, comment_date) VALUES ('very good', 'joana', 3, '2020-11-04');
+cqlsh:videosharing> INSERT INTO commentsPerVideo (comment, author, videoID, comment_date) VALUES ('very bad', 'joana', 4, '2020-11-05');
+cqlsh:videosharing> INSERT INTO commentsPerVideo (comment, author, videoID, comment_date) VALUES ('meh', 'luisa', 5, '2020-11-03');
+cqlsh:videosharing> INSERT INTO commentsPerVideo (comment, author, videoID, comment_date) VALUES ('awful', 'laura', 6, '2020-11-05');
+cqlsh:videosharing> INSERT INTO commentsPerVideo (comment, author, videoID, comment_date) VALUES ('like it', 'ana', 7, '2020-11-06');
+cqlsh:videosharing> INSERT INTO commentsPerVideo (comment, author, videoID, comment_date) VALUES ('fantastic', 'joao', 8, '2020-11-07');
+cqlsh:videosharing> INSERT INTO commentsPerVideo (comment, author, videoID, comment_date) VALUES ('bad', 'manel', 9,  '2020-11-08');
+cqlsh:videosharing> INSERT INTO commentsPerVideo (comment, author, videoID, comment_date) VALUES ('good', 'pedro', 10, '2020-11-09');
+cqlsh:videosharing> INSERT INTO commentsPerVideo (comment, author, videoID, comment_date) VALUES ('great', 'miguel', 11, '2020-11-10');
+cqlsh:videosharing> INSERT INTO commentsPerVideo (comment, author, videoID, comment_date) VALUES ('good', 'jose', 12, '2020-11-11');
+cqlsh:videosharing> 
+cqlsh:videosharing> SELECT * FROM commentsPerVideo;
+
+ videoid | comment_date | author | comment
+---------+--------------+--------+-----------
+       5 |   2020-11-03 |  luisa |       meh
+      10 |   2020-11-09 |  pedro |      good
+      11 |   2020-11-10 | miguel |     great
+       1 |   2020-11-02 |  maria |      good
+       8 |   2020-11-07 |   joao | fantastic
+       2 |   2020-11-03 |  joana |       bad
+       4 |   2020-11-05 |  joana |  very bad
+       7 |   2020-11-06 |    ana |   like it
+       6 |   2020-11-05 |  laura |     awful
+       9 |   2020-11-08 |  manel |       bad
+      12 |   2020-11-11 |   jose |      good
+       3 |   2020-11-04 |  joana | very good
+
+(12 rows)
+
+cqlsh:videosharing> CREATE TABLE commentsPerUser (comment text, author text, videoID int, comment_date date, PRIMARY KEY (author, comment_date)) WITH CLUSTERING ORDER BY (comment_date DESC);
+cqlsh:videosharing> 
+cqlsh:videosharing> INSERT INTO commentsPerUser (comment, author, videoID, comment_date) VALUES ('good','maria', 1, '2020-11-02');
+cqlsh:videosharing> INSERT INTO commentsPerUser (comment, author, videoID, comment_date) VALUES ('bad', 'joana', 2, '2020-11-03');
+cqlsh:videosharing> INSERT INTO commentsPerUser (comment, author, videoID, comment_date) VALUES ('very good', 'joana', 3, '2020-11-04');
+cqlsh:videosharing> INSERT INTO video_comments (comment, author, videoID, comment_date) VALUES ('very bad', 'joana', 4, '2020-11-05');
+InvalidRequest: Error from server: code=2200 [Invalid query] message="unconfigured table video_comments"
+cqlsh:videosharing> INSERT INTO commentsPerUser (comment, author, videoID, comment_date) VALUES ('meh', 'luisa', 5, '2020-11-03');
+cqlsh:videosharing> INSERT INTO commentsPerUser (comment, author, videoID, comment_date) VALUES ('awful', 'laura', 6, '2020-11-05');
+cqlsh:videosharing> INSERT INTO commentsPerUser (comment, author, videoID, comment_date) VALUES ('like it', 'ana', 7, '2020-11-06');
+cqlsh:videosharing> INSERT INTO commentsPerUser (comment, author, videoID, comment_date) VALUES ('fantastic', 'joao', 8, '2020-11-07');
+cqlsh:videosharing> INSERT INTO commentsPerUser (comment, author, videoID, comment_date) VALUES ('bad', 'manel', 9,  '2020-11-08');
+cqlsh:videosharing> INSERT INTO commentsPerUser (comment, author, videoID, comment_date) VALUES ('good', 'pedro', 10, '2020-11-09');
+cqlsh:videosharing> INSERT INTO commentsPerUser (comment, author, videoID, comment_date) VALUES ('great', 'miguel', 11, '2020-11-10');
+cqlsh:videosharing> INSERT INTO commentsPerUser (comment, author, videoID, comment_date) VALUES ('good', 'jose', 12, '2020-11-11');
+cqlsh:videosharing> 
+cqlsh:videosharing> SELECT * FROM commentsPerUser;
+
+ author | videoid | comment_date | comment
+--------+---------+--------------+-----------
+   jose |      12 |   2020-11-11 |      good
+    ana |       7 |   2020-11-06 |   like it
+  joana |       2 |   2020-11-03 |       bad
+  manel |       9 |   2020-11-08 |       bad
+  pedro |      10 |   2020-11-09 |      good
+  luisa |       5 |   2020-11-03 |       meh
+   joao |       8 |   2020-11-07 | fantastic
+ miguel |      11 |   2020-11-10 |     great
+  laura |       6 |   2020-11-05 |     awful
+  joana |       3 |   2020-11-04 | very good
+  maria |       1 |   2020-11-02 |      good
+
+(11 rows)
+
+cqlsh:videosharing> CREATE TABLE video_followers (user text, videoID int, PRIMARY KEY (videoID));
+cqlsh:videosharing> 
+cqlsh:videosharing> INSERT INTO video_followers (user, videoID) VALUES ('maria', 1);
+cqlsh:videosharing> INSERT INTO video_followers (user, videoID) VALUES ('joana', 2);
+cqlsh:videosharing> INSERT INTO video_followers (user, videoID) VALUES ('joana', 3);
+cqlsh:videosharing> INSERT INTO video_followers (user, videoID) VALUES ('luisa', 5);
+cqlsh:videosharing> INSERT INTO video_followers (user, videoID) VALUES ('laura', 6);
+cqlsh:videosharing> INSERT INTO video_followers (user, videoID) VALUES ('ana', 7);
+cqlsh:videosharing> INSERT INTO video_followers (user, videoID) VALUES ('joao',8);
+cqlsh:videosharing> INSERT INTO video_followers (user, videoID) VALUES ('manel', 9);
+cqlsh:videosharing> INSERT INTO video_followers (user, videoID) VALUES ('pedro', 10);
+cqlsh:videosharing> INSERT INTO video_followers (user, videoID) VALUES ('miguel', 11);
+cqlsh:videosharing> INSERT INTO video_followers (user, videoID) VALUES ('jose', 12);
+cqlsh:videosharing> 
+cqlsh:videosharing> 
+cqlsh:videosharing> SELECT * FROM video_followers;
+
+ videoid | user
+---------+--------
+       5 |  luisa
+      10 |  pedro
+      11 | miguel
+       1 |  maria
+       8 |   joao
+       2 |  joana
+       7 |    ana
+       6 |  laura
+       9 |  manel
+      12 |   jose
+       3 |  joana
+
+(11 rows)
+cqlsh:videosharing> CREATE TABLE events (user text, videoID int, event_type text, event_timestamp timestamp,  event_duration int, PRIMARY KEY ((user, videoID), event_timestamp)) WITH CLUSTERING ORDER BY (event_timestamp DESC );
+cqlsh:videosharing> 
+cqlsh:videosharing> INSERT INTO events (user, videoID, event_type, event_timestamp, event_duration) VALUES ('maria', 1, 'play','2020-11-02 13:30:00.000', 3600);
+cqlsh:videosharing> INSERT INTO events (user, videoID, event_type, event_timestamp, event_duration) VALUES ('maria', 1, 'pause','2020-11-02 14:30:00.000', 600);
+cqlsh:videosharing> INSERT INTO events (user, videoID, event_type, event_timestamp, event_duration) VALUES ('joana', 2, 'play','2020-11-03 14:30:00.000', 600);
+cqlsh:videosharing> INSERT INTO events (user, videoID, event_type, event_timestamp, event_duration) VALUES ('joana', 2, 'stop','2020-11-03 14:40:00.000', 3600);
+cqlsh:videosharing> INSERT INTO events (user, videoID, event_type, event_timestamp, event_duration) VALUES ('joana',3, 'play','2020-11-04 15:30:00.000', 1800);
+cqlsh:videosharing> INSERT INTO events (user, videoID, event_type, event_timestamp, event_duration) VALUES ('joana',3, 'pause','2020-11-03 16:00:00.000', 600);
+cqlsh:videosharing> INSERT INTO events (user, videoID, event_type, event_timestamp, event_duration) VALUES ('luisa', 5, 'play', '2020-11-04 20:30:00.000', 3600);
+cqlsh:videosharing> INSERT INTO events (user, videoID, event_type, event_timestamp, event_duration) VALUES ('luisa', 5, 'stop', '2020-11-04 21:30:00.000', 3600);
+cqlsh:videosharing> 
+cqlsh:videosharing> SELECT * FROM events;
+
+ user  | videoid | event_timestamp                 | event_duration | event_type
+-------+---------+---------------------------------+----------------+------------
+ joana |       2 | 2020-11-03 14:40:00.000000+0000 |           3600 |       stop
+ joana |       2 | 2020-11-03 14:30:00.000000+0000 |            600 |       play
+ luisa |       5 | 2020-11-04 21:30:00.000000+0000 |           3600 |       stop
+ luisa |       5 | 2020-11-04 20:30:00.000000+0000 |           3600 |       play
+ joana |       3 | 2020-11-04 15:30:00.000000+0000 |           1800 |       play
+ joana |       3 | 2020-11-03 16:00:00.000000+0000 |            600 |      pause
+ maria |       1 | 2020-11-02 14:30:00.000000+0000 |            600 |      pause
+ maria |       1 | 2020-11-02 13:30:00.000000+0000 |           3600 |       play
+
+(8 rows)
+cqlsh:videosharing> 
+
+cqlsh:videosharing> CREATE TABLE ratingPerVideo (id int, videoID int, rating int, PRIMARY KEY (videoID, rating)) WITH CLUSTERING ORDER BY (rating DESC);
+cqlsh:videosharing> 
+cqlsh:videosharing> INSERT INTO ratingPerVideo (id, videoID, rating) VALUES (1, 3, 4);
+cqlsh:videosharing> INSERT INTO ratingPerVideo (id, videoID, rating) VALUES (2, 2, 2);
+cqlsh:videosharing> INSERT INTO ratingPerVideo (id, videoID, rating) VALUES (3, 4, 5);
+cqlsh:videosharing> INSERT INTO ratingPerVideo (id, videoID, rating) VALUES (4, 3, 3);
+cqlsh:videosharing> INSERT INTO ratingPerVideo (id, videoID, rating) VALUES (5, 5, 4);
+cqlsh:videosharing> INSERT INTO ratingPerVideo (id, videoID, rating) VALUES (6, 6, 2);
+cqlsh:videosharing> INSERT INTO ratingPerVideo (id, videoID, rating) VALUES (7, 7, 5);
+cqlsh:videosharing> INSERT INTO ratingPerVideo (id, videoID, rating) VALUES (8, 8, 3);
+cqlsh:videosharing> INSERT INTO ratingPerVideo (id, videoID, rating) VALUES (9, 9, 4);
+cqlsh:videosharing> INSERT INTO ratingPerVideo (id, videoID, rating) VALUES (10, 10, 2);
+cqlsh:videosharing> INSERT INTO ratingPerVideo (id, videoID, rating) VALUES (11, 11, 5);
+cqlsh:videosharing> INSERT INTO ratingPerVideo (id, videoID, rating) VALUES (12, 12, 3);
+cqlsh:videosharing> 
+cqlsh:videosharing> SELECT * FROM ratingPerVideo;
+
+ videoid | rating | id
+---------+--------+----
+       5 |      4 |  5
+      10 |      2 | 10
+      11 |      5 | 11
+       8 |      3 |  8
+       2 |      2 |  2
+       4 |      5 |  3
+       7 |      5 |  7
+       6 |      2 |  6
+       9 |      4 |  9
+      12 |      3 | 12
+       3 |      4 |  1
+       3 |      3 |  4
+
+(12 rows)
+cqlsh:videosharing> 
+
+cqlsh:videosharing> SELECT * FROM videosperauthor WHERE author = 'joana';
+
+ author | id | up_timestamp
+--------+----+---------------------------------
+  joana |  2 | 2020-11-02 14:30:00.000000+0000
+  joana |  3 | 2020-11-03 14:30:00.000000+0000
+  joana |  4 | 2020-11-04 14:30:00.000000+0000
+
+(3 rows)
+cqlsh:videosharing> 
+
+
+cqlsh:videosharing> SELECT * FROM commentsperuser WHERE author='joana' ;
+
+ author | comment_date | comment   | videoid
+--------+--------------+-----------+---------
+  joana |   2020-11-04 | very good |       3
+  joana |   2020-11-03 |       bad |       2
+
+(2 rows)
+cqlsh:videosharing> 
+
+
+
+cqlsh:videosharing> SELECT * FROM commentspervideo WHERE videoID=3;
+
+ videoid | comment_date | author | comment
+---------+--------------+--------+-----------
+       3 |   2020-11-04 |  joana | very good
+
+(1 rows)
+
+
+cqlsh:videosharing> SELECT avg(rating) as AVG, count(rating) as NReviews FROM ratingpervideo WHERE videoID = 3;
+
+ avg | nreviews
+-----+----------
+   3 |        2
+
+(1 rows)
+
+cqlsh:videosharing> SELECT * FROM commentspervideo LIMIT 3;
+
+ videoid | comment_date | author | comment
+---------+--------------+--------+---------
+       5 |   2020-11-03 |  luisa |     meh
+      10 |   2020-11-09 |  pedro |    good
+      11 |   2020-11-10 | miguel |   great
+
+(3 rows)
+
+cqlsh:videosharing> SELECT * FROM tagspervideo WHERE id=3;
+
+ id | tag              | up_timestamp
+----+------------------+---------------------------------
+  3 | ['Porto', 'Fun'] | 2020-11-03 14:30:00.000000+0000
+
+(1 rows)
+
+
+cqlsh:videosharing> SELECT * FROM videospertag WHERE tag='Aveiro';
+
+ tag    | id
+--------+----
+ Aveiro |  1
+
+(1 rows)
+
+cqlsh:videosharing> SELECT * FROM videosperauthor WHERE author='joana' LIMIT 5;
+
+ author | id | up_timestamp
+--------+----+---------------------------------
+  joana |  2 | 2020-11-02 14:30:00.000000+0000
+  joana |  3 | 2020-11-03 14:30:00.000000+0000
+  joana |  4 | 2020-11-04 14:30:00.000000+0000
+
+(3 rows)
+cqlsh:videosharing> 
+
+
+
+cqlsh:videosharing> SELECT * FROM videos LIMIT 10;
+
+ id | up_timestamp                    | author | description | tag               | videoname
+----+---------------------------------+--------+-------------+-------------------+-----------
+  5 | 2020-11-03 15:30:00.000000+0000 |  luisa |  descVideo3 |         ['Braga'] |    video3
+ 10 | 2020-11-08 20:30:00.000000+0000 |  pedro |  descVideo8 |  ['Evora', 'Sad'] |    video8
+ 11 | 2020-11-09 21:30:00.000000+0000 | miguel |  descVideo9 |   ['Faro', 'Fun'] |    video9
+  1 | 2020-11-01 13:30:00.000000+0000 |  maria |  descVideo1 | ['Aveiro', 'Fun'] |    video1
+  8 | 2020-11-06 18:30:00.000000+0000 |   joao |  descVideo6 |  ['Viseu', 'Fun'] |    video6
+  2 | 2020-11-02 14:30:00.000000+0000 |  joana |  descVideo2 |         ['Porto'] |    video2
+  4 | 2020-11-04 14:30:00.000000+0000 |  joana |  descVideo4 |  ['Porto', 'Sad'] |    video4
+  7 | 2020-11-05 17:30:00.000000+0000 |    ana |  descVideo5 |      ['Santarem'] |    video5
+  6 | 2020-11-04 16:30:00.000000+0000 |  laura |  descVideo4 | ['Lisboa', 'Sad'] |    video4
+  9 | 2020-11-07 19:30:00.000000+0000 |  manel |  descVideo7 |        ['Guarda'] |    video7
+
+(10 rows)
+
+
+cqlsh:videosharing> SELECT * FROM video_followers WHERE videoID=3;
+
+ videoid | user
+---------+-------
+       3 | joana
+
+(1 rows)
+
+cqlsh:videosharing> SELECT * FROM ratingpervideo LIMIT 5;
+
+ videoid | rating | id
+---------+--------+----
+       5 |      4 |  5
+      10 |      2 | 10
+      11 |      5 | 11
+       8 |      3 |  8
+       2 |      2 |  2
+
+(5 rows)
+
+cqlsh:videosharing> SELECT * FROM videosperauthor WHERE author='joana' AND up_timestamp< '2020-11-04 14:30:00.000';
+
+ author | up_timestamp                    | id
+--------+---------------------------------+----
+  joana | 2020-11-03 14:30:00.000000+0000 |  3
+  joana | 2020-11-02 14:30:00.000000+0000 |  2
+
+(2 rows)
+
+
+cqlsh:videosharing> SELECT * FROM videos;
+
+ id | up_timestamp                    | author | description | tag               | videoname
+----+---------------------------------+--------+-------------+-------------------+-----------
+  5 | 2020-11-03 15:30:00.000000+0000 |  luisa |  descVideo3 |         ['Braga'] |    video3
+ 10 | 2020-11-08 20:30:00.000000+0000 |  pedro |  descVideo8 |  ['Evora', 'Sad'] |    video8
+ 11 | 2020-11-09 21:30:00.000000+0000 | miguel |  descVideo9 |   ['Faro', 'Fun'] |    video9
+  1 | 2020-11-01 13:30:00.000000+0000 |  maria |  descVideo1 | ['Aveiro', 'Fun'] |    video1
+  8 | 2020-11-06 18:30:00.000000+0000 |   joao |  descVideo6 |  ['Viseu', 'Fun'] |    video6
+  2 | 2020-11-02 14:30:00.000000+0000 |  joana |  descVideo2 |         ['Porto'] |    video2
+  4 | 2020-11-04 14:30:00.000000+0000 |  joana |  descVideo4 |  ['Porto', 'Sad'] |    video4
+  7 | 2020-11-05 17:30:00.000000+0000 |    ana |  descVideo5 |      ['Santarem'] |    video5
+  6 | 2020-11-04 16:30:00.000000+0000 |  laura |  descVideo4 | ['Lisboa', 'Sad'] |    video4
+  9 | 2020-11-07 19:30:00.000000+0000 |  manel |  descVideo7 |        ['Guarda'] |    video7
+ 12 | 2020-11-10 22:30:00.000000+0000 |   jose | descVideo10 |   ['Beja', 'Sad'] |   video10
+  3 | 2020-11-03 14:30:00.000000+0000 |  joana |  descVideo3 |  ['Porto', 'Fun'] |    video3
+
+(12 rows)
+
+
+cqlsh:videosharing> SELECT tag, count(id) as Count FROM videospertag ;
+
+ tag      | count
+----------+-------
+ Santarem |    12
+
+(1 rows)
+
+Warnings :
+Aggregation query used without partition key
+
+cqlsh:videosharing> SELECT tag, count(id) as Count FROM videospertag WHERE tag='Fun';
+
+ tag | count
+-----+-------
+ Fun |     1
+
+(1 rows)
+cqlsh:videosharing> SELECT tag, COUNT(tag) as Count FROM videospertag GROUP BY tag;
+
+ tag      | count
+----------+-------
+ Santarem |     1
+    Evora |     1
+     Faro |     1
+   Lisboa |     1
+   Aveiro |     1
+    Porto |     1
+      Fun |     1
+   Guarda |     1
+    Viseu |     1
+      Sad |     1
+    Braga |     1
+     Beja |     1
+
+(12 rows)
+
+Warnings :
+Aggregation query used without partition key
+
+
+

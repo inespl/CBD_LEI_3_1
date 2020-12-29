@@ -1,0 +1,13 @@
+{"id": 5, "tag": ["Braga"], "up_timestamp": "2020-11-03 15:30:00.000Z"}
+ {"id": 10, "tag": ["Evora", "Sad"], "up_timestamp": "2020-11-08 20:30:00.000Z"}
+  {"id": 11, "tag": ["Faro", "Fun"], "up_timestamp": "2020-11-09 21:30:00.000Z"}
+ {"id": 1, "tag": ["Aveiro", "Fun"], "up_timestamp": "2020-11-01 13:30:00.000Z"}
+  {"id": 8, "tag": ["Viseu", "Fun"], "up_timestamp": "2020-11-06 18:30:00.000Z"}
+         {"id": 2, "tag": ["Porto"], "up_timestamp": "2020-11-02 14:30:00.000Z"}
+  {"id": 4, "tag": ["Porto", "Sad"], "up_timestamp": "2020-11-04 14:30:00.000Z"}
+      {"id": 7, "tag": ["Santarem"], "up_timestamp": "2020-11-05 17:30:00.000Z"}
+ {"id": 6, "tag": ["Lisboa", "Sad"], "up_timestamp": "2020-11-04 16:30:00.000Z"}
+        {"id": 9, "tag": ["Guarda"], "up_timestamp": "2020-11-07 19:30:00.000Z"}
+  {"id": 12, "tag": ["Beja", "Sad"], "up_timestamp": "2020-11-10 22:30:00.000Z"}
+  {"id": 3, "tag": ["Porto", "Fun"], "up_timestamp": "2020-11-03 14:30:00.000Z"}
+
