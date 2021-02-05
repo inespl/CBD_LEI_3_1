@@ -1,0 +1,97 @@
+// NMEC: 92928
+
+#1
+MATCH(p:Person) -[:DIRECTED] -> (m:Movie) <- [:ACTED_IN] - (p) 
+RETURN DISTINCT p.name, m.title
+
+#2
+MATCH(p:Person) -[:ACTED_IN] -> (m:Movie) where m.released>2005
+RETURN DISTINCT p.name, m.title
+
+#3
+MATCH (p)-[r]-(m) with p,m,count(r) as relations where relations>1
+RETURN p, m, relations
+
+#4
+MATCH (p1: Person) - [:REVIEWED] -> (m:Movie) <- [:REVIEWED] - (p2: Person) 
+RETURN DISTINCT p1.name, p2.name, m.title
+
+#5
+MATCH (p1: Person) - [:ACTED_IN] -> (m: Movie) <- [:ACTED_IN] - (p2: Person) 
+with p1, p2, count(m) as count where count > 1 
+RETURN DISTINCT p1.name, p2.name, m.title
+
+#6
+MATCH (p: Person) - [ACTED_IN] -> (m: Movie)
+where m.title="Apollo 13" 
+with date.realtime().year - round(avg(p.born)) as avg
+RETURN avg
+
+#7
+MATCH (p: Person) - [ACTED_IN] -> (m: Movie)
+with m, m.released - avg(p.born) as avgAge
+RETURN m.title as mv, round(avgAge*100)/100 as avgRelease
+order by avgRelease DESC limit 10 
+
+#8
+MATCH (p: Person) - [ACTED_IN] -> (m: Movie)
+with m, m.released - avg(p.born) as avgAge
+order by avgAge limit 1
+match (p) - [ACTED_IN] -> (m)
+RETURN m.title, p.name, p.born
+
+#9
+MATCH path = shortestPath((start_node{name:"John Cusack"}) - [*..50] - (end_node{name:"Demi Moore"}))
+RETURN path
+
+#10
+MATCH path = shortestPath( (start_node:Person{name:"Keanu Reeves"}) - [*..50] - (end_node:Person{name:"Tom Cruise"})
+)
+unwind nodes(path) as nos
+RETURN count(nos)
+
+#11
+match path=shortestPath((start_node: Person ) - [*..50] - (end_node: Person ))
+where start_node.name contains 'Jim' and end_node.name contains 'Kevin'
+unwind nodes(path) as nos
+with start_node, end_node, count(nos) as count
+RETURN start_node.name, end_node.name, count
+
+#12
+match path=shortestPath((start_node: Person ) - [*..50] - (end_node: Person {name:"Jim Cash"} ))
+where start_node<>end_node
+unwind nodes(path) as nos
+with start_node, end_node, count(nos) as count
+where count=3
+RETURN start_node.name, end_node.name, count
+
+#13
+match path=shortestPath((start_node: Person ) - [*..50] - (end_node: Person {name:"Kevin Bacon"} ))
+where start_node<>end_node
+unwind nodes(path) as nos
+with start_node, end_node, count(nos) as count
+RETURN start_node.name, end_node.name, count
+order by count DESC limit 1
+
+#14
+match path = shortestPath((start_node: Person ) - [*1..50] - (end_node: Person ))
+where start_node<>end_node
+unwind nodes(path) as nos
+with start_node,end_node, count(nos) as count
+order by count DESC limit 1
+RETURN start_node.name, end_node.name, count
+
+#15
+match path = shortestPath((start_node: Person ) - [*1..50] - (end_node: Person ))
+where start_node<>end_node
+unwind nodes(path) as nos
+with start_node,end_node, count(nos) as count
+RETURN  count, count(count)/2
+
+#16
+match path = shortestPath((start_node: Person ) - [:ACTED_IN*1..50] - (end_node: Person ))
+where start_node<>end_node
+unwind nodes(path) as nos
+with start_node,end_node, count(nos) as count
+RETURN  start_node.name as name, avg(count) as avg
+order by avg limit 10

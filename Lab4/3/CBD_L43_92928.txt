@@ -1,0 +1,44 @@
+// NMEC: 92928
+
+#1
+match (m: Member) 
+return m
+
+#2
+match (m: Member) 
+return m.real_name
+
+#3
+match ()-[r: COMMITED]->(p: Project)
+with p, count(r) as count
+where count >= 1
+return p
+
+#4
+match (m: Member)-[r: COMMITED]->()
+with m, count(r) as count
+return m, count
+
+#5
+match (m: Member)-[r: COMMITED]->()
+with m, count(r) as count
+return m, count
+order by count DESC
+
+#6
+match ()-[r: COMMITED]->(p: Project)
+with project, count(r) as count
+return p, count
+
+#7
+match ()-[r: COMMITED]->(p: Project)
+with p, count(r.role_on_project = "Committer") as count
+return p, count
+
+#8
+match (atm: Member {svn_id: "atm"})-[:COMMITED]->(p: Project)<-[:COMMITED]-(m: Member)
+return atm.real_name, m.real_name, p.project_name
+
+#9
+match (atm: Member {svn_id: "atm"})-[:COMMITED {role_on_project: "PMC"}]->(project:Project)<-[:COMMITED {role_on_project: "Committer"}]-(m: Member)
+return m
